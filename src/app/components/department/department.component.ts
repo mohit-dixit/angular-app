@@ -3,6 +3,7 @@ import { HttpService } from '../../service/http.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpHeaders } from '@angular/common/http';
+import { environment } from '../../Environment/environment';
 
 @Component({
   selector: 'app-department',
@@ -24,7 +25,8 @@ export class DepartmentComponent {
   }
 
   retrieveAllDepartments() {
-    this.service.getalldata().subscribe((data: any) => {
+    let api = environment.apis.department;
+    this.service.getalldata(api).subscribe((data: any) => {
       if (data && data.length > 0) {
         this.allDepartments = data;
       }
@@ -38,7 +40,8 @@ export class DepartmentComponent {
   }
 
   saveButtonClick() {
-    this.service.savedata(this.txtName).subscribe((data: any) => {
+    let api = environment.apis.department;
+    this.service.savedata(api, this.txtName).subscribe((data: any) => {
       this.retrieveAllDepartments();
       this.txtName = '';
       this.lblConfirmation = 'Department saved successfully';
@@ -49,11 +52,12 @@ export class DepartmentComponent {
   }
 
   updateButtonClick() {
+    let api = environment.apis.department;
     let updateobject = {
       id: this.selectedDepartmentId,
       name: this.txtName
     }
-    this.service.updatedata(updateobject).subscribe((data: any) => {
+    this.service.updatedata(api, updateobject).subscribe((data: any) => {
       this.retrieveAllDepartments();
       this.txtName = '';
       this.selectedDepartmentId = 0;
@@ -71,7 +75,8 @@ export class DepartmentComponent {
   }
 
   deleteDepartment(department: any) {
-    this.service.deletedata(department.id).subscribe((data: any) => {
+    let api = environment.apis.department;
+    this.service.deletedata(api, department.id).subscribe((data: any) => {
       this.retrieveAllDepartments();
       this.txtName = '';
       this.lblConfirmation = 'Department deleted successfully';
