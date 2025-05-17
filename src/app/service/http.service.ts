@@ -31,4 +31,9 @@ export class HttpService {
     const apiUrl = this.context + "departments";
     return this.http.get(apiUrl);
   }
+
+  getdatabyid(id : number){
+    const apiUrl = this.context + "departments";
+    return this.http.get(apiUrl+"/"+id);
+  }
 }

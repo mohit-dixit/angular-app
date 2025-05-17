@@ -1,7 +1,7 @@
 <div class="content">
   <input style="margin-left: 100px; margin-top: 100px;" [(ngModel)]="txtName" type="text" name="txtName" id="txtName">
-  <button style="margin-left: 10px;" [disabled]="!txtName" *ngIf="!editBtnClicked" (click)="saveButtonClick()">Save</button>
-  <button style="margin-left: 10px;" [disabled]="!txtName" *ngIf="editBtnClicked" (click)="updateButtonClick()">Update</button>
+  <button style="margin-left: 10px;" [disabled]="!txtName" *ngIf="!this.selectedDepartmentId" (click)="saveButtonClick()">Save</button>
+  <button style="margin-left: 10px;" [disabled]="!txtName" *ngIf="this.selectedDepartmentId" (click)="updateButtonClick()">Update</button>
   <label style="margin-left: 10px;" *ngIf="!txtName" id="lblSaveConf">{{lblConfirmation}}</label>
 
   <div *ngIf="allDepartments.length > 0" style="margin-left: 100px; margin-top: 10px;">

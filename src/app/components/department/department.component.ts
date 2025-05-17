@@ -16,7 +16,6 @@ export class DepartmentComponent {
   txtName: string = '';
   selectedDepartmentId: number = 0;
   lblConfirmation: string = '';
-  editBtnClicked: boolean = false;
 
   constructor(private service: HttpService) { }
 
@@ -57,6 +56,7 @@ export class DepartmentComponent {
     this.service.updatedata(updateobject).subscribe((data: any) => {
       this.retrieveAllDepartments();
       this.txtName = '';
+      this.selectedDepartmentId = 0;
       this.lblConfirmation = 'Department updated successfully';
     }, error => {
       console.log("Error in saving data");
@@ -65,7 +65,6 @@ export class DepartmentComponent {
   }
 
   editDepartment(department: any) {
-    this.editBtnClicked = true;
     this.txtName = department.name;
     this.selectedDepartmentId = department.id;
     this.lblConfirmation = '';
