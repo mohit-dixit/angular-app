@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { HttpService } from '../../service/http.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpHeaders } from '@angular/common/http';
-import { environment } from '../../Environment/environment';
+import { environment } from '../../environments/environment';
+import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'app-department',
@@ -41,7 +40,10 @@ export class DepartmentComponent {
 
   saveButtonClick() {
     let api = environment.apis.department;
-    this.service.savedata(api, this.txtName).subscribe((data: any) => {
+    let saveobject = {
+      name: this.txtName
+    }
+    this.service.savedata(api, saveobject).subscribe((data: any) => {
       this.retrieveAllDepartments();
       this.txtName = '';
       this.lblConfirmation = 'Department saved successfully';

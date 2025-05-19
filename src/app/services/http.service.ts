@@ -1,21 +1,21 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../Environment/environment';
+import { AppConfigService } from './app-config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
-  
-  context = environment.context;
 
-  constructor(private http:HttpClient) { }
+  private context: any;
 
-  savedata(api : string, str : string){
+  constructor(private http:HttpClient, private configService: AppConfigService) { 
+    this.context = this.configService.getConfig().context;
+  }
+
+  savedata(api : string, saveobject : any){    
     const apiUrl = this.context + api;
-    let params = new HttpParams();
-    params = params.set('name', str);
-    return this.http.post(apiUrl, null, { params: params });
+    return this.http.post(apiUrl, null, { params: saveobject });
   }
 
   updatedata(api : string, updateobject : any){
