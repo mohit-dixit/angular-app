@@ -1,23 +1,11 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<div>
+    <a routerLink="login" routerLinkActive="active">Login</a> |
+    <a routerLink="home" routerLinkActive="active">Dashboard</a> |
+    <a routerLink="aboutus" routerLinkActive="active">About</a> |
+    <a routerLink="contactus" routerLinkActive="active">Contact</a> |
+    <a routerLink="departments" routerLinkActive="active">Departments</a>|
+    <a routerLink="products" routerLinkActive="active">Products</a>
+    <a style="cursor: pointer;" (click)="logOut()">Log Out</a>    
+</div>
 
-<main class="main">
-<app-department></app-department>
-</main>
-
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-
-<router-outlet />
+<router-outlet></router-outlet>
