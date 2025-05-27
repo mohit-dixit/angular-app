@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { HttpService } from '../../services/http.service';
 import { environment } from '../../environments/environment';
+import { filter, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -15,8 +16,17 @@ export class LoginComponent {
 
   signUpForm!: FormGroup;
   loginForm!: FormGroup;
+  private routerSubscription: Subscription;
 
-  constructor(private router: Router, private _fb: FormBuilder, private service: HttpService) { }
+  constructor(private router: Router, private _fb: FormBuilder, private service: HttpService) { 
+    this.routerSubscription = this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      if (event.urlAfterRedirects === '/login') {
+        sessionStorage.setItem('isLoggedIn', 'false');
+      }
+    });
+  }
 
   ngOnInit() {
     this.signUpForm = this._fb.group({
@@ -77,11 +87,7 @@ export class LoginComponent {
     });
 
     if (this.loginForm.valid
-      && this.loginForm.value.username
-      && this.loginForm.value.password) {
-
-      // sessionStorage.setItem('isLoggedIn', 'true');
-      // this.router.navigate(['home']);
+      && this.loginForm.value.username && this.loginForm.value.password) {
 
        let loginobject = {
         username: this.loginForm.value.username,
@@ -107,8 +113,9 @@ export class LoginComponent {
     }
   }
 
-  cancel() {
-
+  ngOnDestroy(): void {
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
+    }
   }
-
 }
