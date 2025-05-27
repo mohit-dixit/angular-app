@@ -16,40 +16,40 @@ export class LoginComponent {
   signUpForm!: FormGroup;
   loginForm!: FormGroup;
 
-  constructor(private router: Router, private _fb: FormBuilder, private service: HttpService) { } 
+  constructor(private router: Router, private _fb: FormBuilder, private service: HttpService) { }
 
   ngOnInit() {
     this.signUpForm = this._fb.group({
-      username: ['', 
-        [Validators.required, 
-          Validators.minLength(5),
-          Validators.maxLength(20)]],
-      email: ['', 
-        [Validators.required, 
-          Validators.email]],
-      password: ['', 
-        [Validators.required, 
-          Validators.minLength(6), 
-          Validators.maxLength(20)]],
-      confirmpassword: ['', 
-        [Validators.required, 
-          Validators.minLength(6), 
-          Validators.maxLength(20)]]
+      username: ['',
+        [Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(20)]],
+      email: ['',
+        [Validators.required,
+        Validators.email]],
+      password: ['',
+        [Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(20)]],
+      confirmpassword: ['',
+        [Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(20)]]
     });
 
     this.loginForm = this._fb.group({
-      username: ['', 
-        [Validators.required, 
-          Validators.minLength(5),
-          Validators.maxLength(20)]],
-      password: ['', 
-        [Validators.required, 
-          Validators.minLength(6), 
-          Validators.maxLength(20)]]
+      username: ['',
+        [Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(20)]],
+      password: ['',
+        [Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(20)]]
     });
   }
 
-  signUp(){
+  signUp() {
     if (this.signUpForm.valid) {
       let api = environment.apis.signup;
       let saveobject = {
@@ -58,13 +58,13 @@ export class LoginComponent {
         password: this.signUpForm.value.password
       }
       this.service.savedata(api, saveobject).subscribe((data: any) => {
-      this.signUpForm.reset();
-      alert("User created successfully. Please login to continue.");
-      console.log("Data saved successfully");
-    }, error => {
-      console.log("Error in saving data");
-      console.log(error);
-    });
+        this.signUpForm.reset();
+        alert("User created successfully. Please login to continue.");
+        console.log("Data saved successfully");
+      }, error => {
+        console.log("Error in saving data");
+        console.log(error);
+      });
       this.router.navigate(['login']);
     } else {
       console.log('Form is invalid');
@@ -76,31 +76,39 @@ export class LoginComponent {
       this.loginForm.get(key)?.markAsTouched();
     });
 
-    if (this.loginForm.valid && this.loginForm.value.username && this.loginForm.value.password) {
+    if (this.loginForm.valid
+      && this.loginForm.value.username
+      && this.loginForm.value.password) {
 
-      sessionStorage.setItem('isLoggedIn', 'true');
-      this.router.navigate(['home']);
+      // sessionStorage.setItem('isLoggedIn', 'true');
+      // this.router.navigate(['home']);
 
-      //   let api = environment.apis.login;
-      //   this.service.getalldata(api).subscribe((data: any) => {
-      //   if (data && data.length > 0) {
+       let loginobject = {
+        username: this.loginForm.value.username,
+        password: this.loginForm.value.password
+      }
 
-      //   }
-      //   else {
-      //     alert("User not found. Please sign up.");
-      //   }
-      // }, error => {
-      //   console.log("Error in retrieving data");
-      //   console.log(error);
-      // });
+      let api = environment.apis.login;
+      this.service.login(api, loginobject).subscribe((data: any) => {
+        if (data) {
+          sessionStorage.setItem('isLoggedIn', 'true');
+          this.router.navigate(['home']);
+        }
+        else {
+          alert("User not found. Please sign up.");
+        }
+      }, error => {
+        console.log("Error in retrieving data");
+        console.log(error);
+      });
     }
     else {
       sessionStorage.setItem('isLoggedIn', 'false');
     }
   }
 
-  cancel(){
-    
+  cancel() {
+
   }
 
 }

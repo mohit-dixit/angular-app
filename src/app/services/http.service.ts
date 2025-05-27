@@ -37,4 +37,9 @@ export class HttpService {
     const apiUrl = this.context + api;
     return this.http.get(apiUrl+"/"+id);
   }
+
+  login(api : string, loginobject : any){
+    const apiUrl = this.context + api;
+    return this.http.post(apiUrl, loginobject);
+  }
 }
