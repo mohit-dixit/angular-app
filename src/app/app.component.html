@@ -1,5 +1,4 @@
-<div>
-    <a routerLink="login" routerLinkActive="active">Login</a> |
+<div *ngIf="isLoggedIn()">
     <a routerLink="home" routerLinkActive="active">Dashboard</a> |
     <a routerLink="aboutus" routerLinkActive="active">About</a> |
     <a routerLink="contactus" routerLinkActive="active">Contact</a> |
