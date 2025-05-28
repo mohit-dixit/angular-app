@@ -13,6 +13,6 @@ export const routes: Routes = [
     { path: 'home', component: DashboardComponent, title: 'Home', canActivate: [authGuard] },
     { path: 'aboutus', component: AboutusComponent, title: 'About Us', canActivate: [authGuard] },
     { path: 'contactus', component: ContactusComponent, title: 'Contact Us', canActivate: [authGuard] },
-    { path: 'departments', component: DepartmentComponent, title: 'Departments', canActivate: [authGuard] },
+    { path: 'samplecrud', component: DepartmentComponent, title: 'Sample CRUD Operation', canActivate: [authGuard] },
     { path: '**', component: PagenotfoundComponent, title: 'Page Not Found' }
 ];

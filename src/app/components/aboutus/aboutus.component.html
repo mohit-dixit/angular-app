@@ -1,1 +1,102 @@
-<p>aboutus works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Web Application Project Overview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f4f6f8;
+      padding: 40px;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #222;
+      margin-bottom: 30px;
+    }
+    .section {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    .section img {
+      width: 60px;
+      height: 60px;
+      margin-right: 20px;
+    }
+    .section-content {
+      flex: 1;
+    }
+    h2 {
+      margin: 0 0 10px;
+      color: #2c3e50;
+    }
+    p {
+      color: #555;
+    }
+    .summary {
+      border-top: 1px solid #ddd;
+      padding-top: 20px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Application Overview</h1>
+    
+    <div class="section">
+      <img src="https://angular.io/assets/images/logos/angular/angular.svg" alt="Angular Logo">
+      <div class="section-content">
+        <h2>Frontend: Angular 19</h2>
+        <p>
+          The frontend is built with Angular 19, the latest version of the modern TypeScript framework.
+          It enables the creation of dynamic, component-based single-page applications (SPAs) with robust tooling and excellent performance.
+        </p>
+      </div>
+    </div>
+
+    <div class="section">
+      <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/spring/spring-original.svg" alt="Spring Boot Logo" />
+      <div class="section-content">
+        <h2>Backend: Java Spring Boot</h2>
+        <p>
+          The backend leverages Java Spring Boot to build secure and scalable RESTful APIs.
+          Spring Boot streamlines application setup and development with auto-configuration, embedded servers, and production-ready features.
+        </p>
+      </div>
+    </div>
+
+    <div class="section">
+      <img src="https://www.postgresql.org/media/img/about/press/elephant.png" alt="PostgreSQL Logo">
+      <div class="section-content">
+        <h2>Database: PostgreSQL</h2>
+        <p>
+          PostgreSQL is used for managing structured data with reliability and advanced querying capabilities.
+          As an open-source RDBMS, it supports complex transactions, JSON data types, and high-performance indexing.
+        </p>
+      </div>
+    </div>
+
+    <div class="summary">
+      <h2>Project Summary</h2>
+      <p>
+        This full-stack web application combines Angular 19 for a modern and responsive UI, Java Spring Boot for a powerful backend,
+        and PostgreSQL for robust and scalable data management. The system architecture ensures performance, maintainability, and scalability.
+      </p>
+    </div>
+  </div>
+</body>
+</html>

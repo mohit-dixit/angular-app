@@ -1,10 +1,4 @@
-<div *ngIf="isLoggedIn()">
-    <a routerLink="home" routerLinkActive="active">Dashboard</a> |
-    <a routerLink="aboutus" routerLinkActive="active">About</a> |
-    <a routerLink="contactus" routerLinkActive="active">Contact</a> |
-    <a routerLink="departments" routerLinkActive="active">Departments</a>|
-    <a routerLink="products" routerLinkActive="active">Products</a>
-    <a style="cursor: pointer;" (click)="logOut()">Log Out</a>    
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="mat-app-background basic-container">
+  <app-sidepanel></app-sidepanel>
 </div>
-
-<router-outlet></router-outlet>

@@ -1,0 +1,41 @@
+<mat-toolbar color="primary" class="example-toolbar">
+    <button mat-icon-button (click)="hamburgerClick()"><mat-icon>menu</mat-icon></button>
+    <h1 class="example-app-name"></h1>
+</mat-toolbar>
+<mat-sidenav-container class="example-container" autosize>
+    <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()"
+        (mouseleave)="mouseleave()">
+        <mat-nav-list>
+            <mat-list-item (click)="showSubmenu = !showSubmenu" class="parent">
+                <span class="full-width" *ngIf="isExpanded || isShowing">NAVIGATION</span>
+                <!-- <mat-icon mat-list-icon>home</mat-icon> -->
+                <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}"
+                    *ngIf="isExpanded || isShowing">expand_more</mat-icon>
+            </mat-list-item>
+            <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
+                <a mat-list-item routerLink="home" routerLinkActive="active">Dashboard</a>
+                <a mat-list-item routerLink="aboutus" routerLinkActive="active">About</a>
+                <a mat-list-item routerLink="contactus" routerLinkActive="active">Contact</a>
+                <a mat-list-item routerLink="samplecrud" routerLinkActive="active">Sample CRUD</a>
+                <a mat-list-item routerLink="notfoundpage" routerLinkActive="active">Sample Not found Page</a>
+                <a mat-list-item *ngIf="isLoggedIn();" style="cursor: pointer;" (click)="logOut()">Log Out</a>
+                <!-- <mat-list-item (click)="showSubSubMenu = !showSubSubMenu" class="parent">
+                    <span class="full-width" *ngIf="isExpanded || isShowing"></span>
+                    <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubSubMenu}"
+                        *ngIf="isExpanded || isShowing">expand_more</mat-icon>
+                </mat-list-item>
+                <div class="submenu" [ngClass]="{'expanded' : showSubSubMenu}" *ngIf="isShowing || isExpanded">
+                    <mat-list-item>SubSubmenu Item 1</mat-list-item>
+                    <mat-list-item>SubSubmenu Item 2</mat-list-item>
+                </div> -->
+            </div>
+        </mat-nav-list>
+        <mat-nav-list>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+
+</mat-sidenav-container>
