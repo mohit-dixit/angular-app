@@ -2,9 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
-import { HttpService } from '../../services/http.service';
+import { HttpService } from '../../services/http/http.service';
 import { environment } from '../../environments/environment';
 import { filter, Subscription } from 'rxjs';
+import { SnackbarService } from '../../services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,10 @@ export class LoginComponent {
   loginForm!: FormGroup;
   private routerSubscription: Subscription;
 
-  constructor(private router: Router, private _fb: FormBuilder, private service: HttpService) { 
+  constructor(private router: Router, 
+      private _fb: FormBuilder, 
+      private _httpservice: HttpService, 
+      private _snackbar: SnackbarService) { 
     this.routerSubscription = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
@@ -67,9 +71,9 @@ export class LoginComponent {
         email: this.signUpForm.value.email,
         password: this.signUpForm.value.password
       }
-      this.service.savedata(api, saveobject).subscribe((data: any) => {
+      this._httpservice.savedata(api, saveobject).subscribe((data: any) => {
         this.signUpForm.reset();
-        alert("User created successfully. Please login to continue.");
+        this._snackbar.showSuccessMessage("User created successfully. Please login to continue.");
         console.log("Data saved successfully");
       }, error => {
         console.log("Error in saving data");
@@ -95,13 +99,14 @@ export class LoginComponent {
       }
 
       let api = environment.apis.login;
-      this.service.login(api, loginobject).subscribe((data: any) => {
+      this._httpservice.login(api, loginobject).subscribe((data: any) => {
         if (data) {
           sessionStorage.setItem('isLoggedIn', 'true');
+          this._snackbar.showSuccessMessage("Login Successful");
           this.router.navigate(['home']);
         }
         else {
-          alert("User not found. Please sign up.");
+          this._snackbar.showErrorMessage("Invalid username or password");
         }
       }, error => {
         console.log("Error in retrieving data");

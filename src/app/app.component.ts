@@ -3,6 +3,7 @@ import { Route, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angu
 import { FormsModule } from '@angular/forms';
 import { DepartmentComponent } from './components/department/department.component';
 import { CommonModule } from '@angular/common';
+import { SnackbarService } from './services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-root',
@@ -14,11 +15,12 @@ import { CommonModule } from '@angular/common';
 export class AppComponent {
   title = 'my-app';
 
-  constructor(private router: Router){}
+  constructor(private router: Router, 
+      private _snackbar: SnackbarService){}
 
   logOut(){
     sessionStorage.setItem('isLoggedIn', 'false');
-    alert('You have been logged out.');
+    this._snackbar.showSuccessMessage("You have been logged out successfully.");
     this.router.navigate(['login']);
   }
 
