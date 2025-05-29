@@ -25,42 +25,26 @@ import { SnackbarService } from '../../services/snackbar/snackbar.service';
 export class SidepanelComponent {
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
-  isExpanded = true;
   showSubmenu: boolean = true;
-  isShowing = true;
-  showSubSubMenu: boolean = true;
 
   constructor(private router: Router,
     private _snackbar: SnackbarService) { }
 
-  mouseenter() {
-    if (!this.isExpanded) {
-      this.isShowing = true;
-    }
-  }
-
-  mouseleave() {
-    if (!this.isExpanded) {
-      this.isShowing = false;
-    }
-  }
-
   logOut() {
+    this.hamburgerClick();
     sessionStorage.setItem('isLoggedIn', 'false');
     this._snackbar.showSuccessMessage("You have been logged out successfully.");
     this.router.navigate(['login']);
   }
 
   hamburgerClick() {
-    this.isExpanded = !this.isExpanded;
-    this.isShowing = this.isExpanded;
     if (this.sidenav) {
       this.sidenav.toggle();
     }
   }  
 
-  isLoggedIn(){
+  isLoggedIn(){  
     const isLoggedIn = sessionStorage.getItem('isLoggedIn');
-    return isLoggedIn === 'true';
+    return isLoggedIn === 'true';    
   }
 }

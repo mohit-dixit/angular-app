@@ -34,6 +34,11 @@
                     <span class="error" *ngIf="loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched">Password must be at least 6 characters</span>
                     <span class="error" *ngIf="loginForm.get('password')?.hasError('maxlength') && loginForm.get('password')?.touched">Password cannot exceed 20 characters</span>
                 <button (click)="login()">Login</button>
+                <span class="infoclass">
+                    <u>Credentials to Login or Please Sign Up</u> <br/><br/>
+                    Username - mohit <br/>
+                    Password - 123456
+                </span>
             </form>
         </div>
     </div>

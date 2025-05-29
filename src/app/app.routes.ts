@@ -11,8 +11,8 @@ export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'login', component: LoginComponent, title: 'Login'},
     { path: 'home', component: DashboardComponent, title: 'Home', canActivate: [authGuard] },
-    { path: 'aboutus', component: AboutusComponent, title: 'About Us', canActivate: [authGuard] },
-    { path: 'contactus', component: ContactusComponent, title: 'Contact Us', canActivate: [authGuard] },
+    { path: 'overview', component: AboutusComponent, title: 'Overview', canActivate: [authGuard] },
+    { path: 'aboutme', component: ContactusComponent, title: 'About Me', canActivate: [authGuard] },
     { path: 'samplecrud', component: DepartmentComponent, title: 'Sample CRUD Operation', canActivate: [authGuard] },
     { path: '**', component: PagenotfoundComponent, title: 'Page Not Found' }
 ];

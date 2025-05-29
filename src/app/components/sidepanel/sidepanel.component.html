@@ -1,24 +1,22 @@
-<mat-toolbar color="primary" class="example-toolbar">
+<mat-toolbar color="primary" *ngIf="isLoggedIn()" class="example-toolbar toppanel">
     <button mat-icon-button (click)="hamburgerClick()"><mat-icon>menu</mat-icon></button>
-    <h1 class="example-app-name"></h1>
+    <h1 class="example-app-name headingclass">Angular 19 + Spring Boot + PostgreSQL Application by Mohit Dixit</h1>
 </mat-toolbar>
 <mat-sidenav-container class="example-container" autosize>
-    <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()"
-        (mouseleave)="mouseleave()">
+    <mat-sidenav #sidenav *ngIf="isLoggedIn()" class="example-sidenav" mode="side" opened="true">
         <mat-nav-list>
             <mat-list-item (click)="showSubmenu = !showSubmenu" class="parent">
-                <span class="full-width" *ngIf="isExpanded || isShowing">NAVIGATION</span>
+                <span class="full-width">NAVIGATION</span>
                 <!-- <mat-icon mat-list-icon>home</mat-icon> -->
-                <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}"
-                    *ngIf="isExpanded || isShowing">expand_more</mat-icon>
+                <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}">expand_more</mat-icon>
             </mat-list-item>
-            <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
+            <div class="submenu" [ngClass]="{'expanded' : showSubmenu}">
                 <a mat-list-item routerLink="home" routerLinkActive="active">Dashboard</a>
-                <a mat-list-item routerLink="aboutus" routerLinkActive="active">About</a>
-                <a mat-list-item routerLink="contactus" routerLinkActive="active">Contact</a>
-                <a mat-list-item routerLink="samplecrud" routerLinkActive="active">Sample CRUD</a>
-                <a mat-list-item routerLink="notfoundpage" routerLinkActive="active">Sample Not found Page</a>
-                <a mat-list-item *ngIf="isLoggedIn();" style="cursor: pointer;" (click)="logOut()">Log Out</a>
+                <a mat-list-item routerLink="overview" routerLinkActive="active">Application Overview</a>                
+                <a mat-list-item routerLink="samplecrud" routerLinkActive="active">Sample Live CRUD Operations</a>
+                <a mat-list-item routerLink="pagenotfound" routerLinkActive="active">Sample 404 Not found Page</a>
+                <a mat-list-item routerLink="aboutme" (click)="this.sidenav.toggle();" routerLinkActive="active">About Me</a>
+                <a mat-list-item class="logoutlink" (click)="logOut()">Log Out</a>
                 <!-- <mat-list-item (click)="showSubSubMenu = !showSubSubMenu" class="parent">
                     <span class="full-width" *ngIf="isExpanded || isShowing"></span>
                     <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubSubMenu}"
