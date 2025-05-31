@@ -72,12 +72,22 @@ export class LoginComponent {
         password: this.signUpForm.value.password
       }
       this._httpservice.savedata(api, saveobject).subscribe((data: any) => {
-        this.signUpForm.reset();
-        this._snackbar.showSuccessMessage("User created successfully. Please login to continue.");
-        console.log("Data saved successfully");
+        if(data) {
+          if(data.success){
+            this.signUpForm.reset();
+            this._snackbar.showSuccessMessage(data.message);
+          }
+          else {
+            this._snackbar.showErrorMessage(data.message);
+          }
+        }
       }, error => {
-        console.log("Error in saving data");
-        console.log(error);
+        if(error && error.error && error.error.text){
+          this._snackbar.showErrorMessage(error.error.text);
+        }
+        else{
+          this._snackbar.showErrorMessage("Error in creating User. Please check the logs.");
+        }
       });
       this.router.navigate(['login']);
     } else {
@@ -109,7 +119,7 @@ export class LoginComponent {
           this._snackbar.showErrorMessage("Invalid username or password");
         }
       }, error => {
-        console.log("Error in retrieving data");
+        this._snackbar.showErrorMessage("Error in retrieving data. Please check the logs.");
         console.log(error);
       });
     }

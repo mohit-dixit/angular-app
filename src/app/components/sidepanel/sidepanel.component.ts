@@ -6,6 +6,7 @@ import { MatSidenav, MatSidenavContainer } from '@angular/material/sidenav';
 import { MatToolbar } from '@angular/material/toolbar';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { SnackbarService } from '../../services/snackbar/snackbar.service';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-sidepanel',
