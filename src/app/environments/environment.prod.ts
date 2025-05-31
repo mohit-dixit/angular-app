@@ -1,7 +1,9 @@
 export const environment = {
   production: true,
   apis: {
-    department: 'departments'
+    department: 'departments',
+    signup: 'signup',
+    login: 'login',
   }  
 }
 

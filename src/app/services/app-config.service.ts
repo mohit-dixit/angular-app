@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ export class AppConfigService {
   constructor(private http: HttpClient) { }
 
   loadConfig(){
-    return this.http.get('/config.json')
+    const configFile = environment.production ? '/config.prod.json' : '/config.json'; // Choose file based on environment
+    return this.http.get(configFile)
       .toPromise().then((config) => {
         this.config = config;
       });
