@@ -4,7 +4,7 @@
   <button style="margin-left: 10px;" [disabled]="!txtName" *ngIf="this.selectedDepartmentId" (click)="updateButtonClick()">Update</button>
   <label style="margin-left: 10px;" *ngIf="!txtName" id="lblSaveConf">{{lblConfirmation}}</label>
 
-  <div *ngIf="allDepartments.length > 0" style="margin-left: 100px; margin-top: 10px;">
+  <div *ngIf="allDepartments && allDepartments.length > 0" style="margin-left: 100px; margin-top: 10px;">
   <h2>Department List</h2>
   <table border="1" style="border-collapse: collapse; min-width: 200px;">
     <thead>

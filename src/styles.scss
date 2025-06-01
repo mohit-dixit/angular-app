@@ -1,4 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+
+@use '@angular/material' as mat;
+
+:root {
+  @include mat.progress-spinner-overrides((
+    active-indicator-color: #FFFFFF,
+  ));
+}
+
 .active {
   background-color: green;
   color: white;
