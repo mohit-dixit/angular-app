@@ -6,6 +6,7 @@ import { MatSidenav, MatSidenavContainer } from '@angular/material/sidenav';
 import { MatToolbar } from '@angular/material/toolbar';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { SnackbarService } from '../../services/snackbar/snackbar.service';
+import { DeviceDetectorService } from '../../services/devicedetector/device-detector.service';
 
 @Component({
   selector: 'app-sidepanel',
@@ -28,7 +29,7 @@ export class SidepanelComponent {
   showSubmenu: boolean = true;
 
   constructor(private router: Router,
-    private _snackbar: SnackbarService) { }
+    private _snackbar: SnackbarService, private _devicedetector: DeviceDetectorService) { }
 
   logOut() {
     this.hamburgerClick();
@@ -46,5 +47,12 @@ export class SidepanelComponent {
   isLoggedIn(){  
     const isLoggedIn = sessionStorage.getItem('isLoggedIn');
     return isLoggedIn === 'true';    
+  }
+
+  hideOnMobile() {
+    const isMobile = this._devicedetector.isMobile();
+    if(isMobile){
+      this.hamburgerClick();
+    }
   }
 }
