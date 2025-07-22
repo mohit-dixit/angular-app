@@ -3,7 +3,7 @@ export const environment = {
   apis: {
     department: 'departments',
     signup: 'signup',
-    login: 'login',
+    login: 'authenticate',
   }  
 }
 
