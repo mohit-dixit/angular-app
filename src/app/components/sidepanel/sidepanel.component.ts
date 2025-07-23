@@ -34,6 +34,10 @@ export class SidepanelComponent {
   logOut() {
     this.hamburgerClick();
     sessionStorage.setItem('isLoggedIn', 'false');
+    sessionStorage.removeItem('authToken');
+    sessionStorage.removeItem('tokenExpiry');
+    sessionStorage.removeItem('loginUsername');
+    
     this._snackbar.showSuccessMessage("You have been logged out successfully.");
     this.router.navigate(['login']);
   }

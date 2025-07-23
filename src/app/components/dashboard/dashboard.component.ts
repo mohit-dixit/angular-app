@@ -8,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
+  username = sessionStorage.getItem('loginUsername');
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
 }

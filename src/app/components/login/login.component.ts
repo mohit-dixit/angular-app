@@ -28,6 +28,9 @@ export class LoginComponent {
     ).subscribe((event: NavigationEnd) => {
       if (event.urlAfterRedirects === '/login') {
         sessionStorage.setItem('isLoggedIn', 'false');
+        sessionStorage.removeItem('authToken');
+        sessionStorage.removeItem('tokenExpiry');
+        sessionStorage.removeItem('loginUsername');
       }
     });
   }
@@ -110,8 +113,11 @@ export class LoginComponent {
 
       let api = environment.apis.login;
       this._httpservice.login(api, loginobject).subscribe((data: any) => {
-        if (data) {
+        if (data && data.success) {
           sessionStorage.setItem('isLoggedIn', 'true');
+          sessionStorage.setItem('authToken', data.token);
+          sessionStorage.setItem('tokenExpiry', data.tokenExpiry);
+          sessionStorage.setItem('loginUsername', data.username);
           this._snackbar.showSuccessMessage("Login Successful");
           this.router.navigate(['home']);
         }
