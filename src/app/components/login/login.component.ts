@@ -121,8 +121,8 @@ export class LoginComponent {
           this._snackbar.showSuccessMessage("Login Successful");
           this.router.navigate(['home']);
         }
-        else {
-          this._snackbar.showErrorMessage("Invalid username or password");
+        else if (data && data.failure && data.message) {
+          this._snackbar.showErrorMessage(data.message);
         }
       }, error => {
         this._snackbar.showErrorMessage("Error in retrieving data. Please check the logs.");
