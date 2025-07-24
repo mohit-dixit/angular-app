@@ -6,6 +6,7 @@ import { HttpService } from '../../services/http/http.service';
 import { environment } from '../../environments/environment';
 import { filter, Subscription } from 'rxjs';
 import { SnackbarService } from '../../services/snackbar/snackbar.service';
+import { TimerService } from '../../services/timer/timer.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent {
   constructor(private router: Router, 
       private _fb: FormBuilder, 
       private _httpservice: HttpService, 
-      private _snackbar: SnackbarService) { 
+      private _snackbar: SnackbarService,
+      private timerService: TimerService) { 
     this.routerSubscription = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
@@ -119,9 +121,12 @@ export class LoginComponent {
           sessionStorage.setItem('tokenExpiry', data.tokenExpiry);
           sessionStorage.setItem('loginUsername', data.username);
           this._snackbar.showSuccessMessage("Login Successful");
+          this.loginForm.reset();
+          this.timerService.resetTimer();
+          this.timerService.startTimer();
           this.router.navigate(['home']);
         }
-        else if (data && data.failure && data.message) {
+        else if (data && !data.success && data.message) {
           this._snackbar.showErrorMessage(data.message);
         }
       }, error => {

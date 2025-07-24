@@ -9,6 +9,10 @@ import { SnackbarService } from '../../services/snackbar/snackbar.service';
 import { DeviceDetectorService } from '../../services/devicedetector/device-detector.service';
 import { environment } from '../../environments/environment';
 import { HttpService } from '../../services/http/http.service';
+import { TimerService } from '../../services/timer/timer.service';
+import { Observable } from 'rxjs';
+import { ModalComponent } from '../modal/modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-sidepanel',
@@ -29,11 +33,16 @@ export class SidepanelComponent {
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
   showSubmenu: boolean = true;
+  time$!: Observable<number>;
 
   constructor(private router: Router,
     private _snackbar: SnackbarService,
     private _devicedetector: DeviceDetectorService,
-    private service: HttpService) { }
+    private service: HttpService,
+    private timerService: TimerService,
+    private _dialog : MatDialog) {
+    this.time$ = this.timerService.time$;
+  }
 
   logOut() {
     this.hamburgerClick();
@@ -67,5 +76,23 @@ export class SidepanelComponent {
     if(isMobile){
       this.hamburgerClick();
     }
+  }
+
+  formatTime(seconds: number): string {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    console.log(`Time remaining: ${mins} minutes and ${secs} seconds`);
+    if(mins === 0 && secs === 1 && this._dialog.openDialogs.length === 0) {
+      this._dialog.open(ModalComponent, {
+      width: '750px',
+      closeOnNavigation: true,
+      disableClose: true,
+      data: {
+        message: "Your session has expired. Please log in again."
+      }      
+    });
+    this._snackbar.showErrorMessage("Your session has expired. Please log in again.");
+    }
+    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
   }
 }

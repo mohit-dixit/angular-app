@@ -29,6 +29,7 @@
                 </div> -->
             </div>
         </mat-nav-list>
+       <p style="margin-left: 10px;" *ngIf="time$ | async as time">Your session will expire in: <strong style="color: red;">{{ formatTime(time) }}</strong></p>
         <mat-nav-list>
         </mat-nav-list>
     </mat-sidenav>

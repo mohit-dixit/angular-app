@@ -4,6 +4,7 @@ import { SidepanelComponent } from './components/sidepanel/sidepanel.component';
 import { LoadingService } from './services/loader/loading.service';
 import { delay } from 'rxjs';
 import { SpinnerCustomizationComponent } from './components/spinner/spinner-customization/spinner-customization.component';
+import { TimerService } from './services/timer/timer.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ export class AppComponent {
   title = 'my-app';
   loading: boolean = false;
 
-  constructor(private _loading: LoadingService){}
+  constructor(private _loading: LoadingService){
+  }
 
   ngOnInit(): void {
     this.listenToLoading();
