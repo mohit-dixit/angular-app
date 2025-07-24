@@ -7,6 +7,8 @@ import { MatToolbar } from '@angular/material/toolbar';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { SnackbarService } from '../../services/snackbar/snackbar.service';
 import { DeviceDetectorService } from '../../services/devicedetector/device-detector.service';
+import { environment } from '../../environments/environment';
+import { HttpService } from '../../services/http/http.service';
 
 @Component({
   selector: 'app-sidepanel',
@@ -29,17 +31,24 @@ export class SidepanelComponent {
   showSubmenu: boolean = true;
 
   constructor(private router: Router,
-    private _snackbar: SnackbarService, private _devicedetector: DeviceDetectorService) { }
+    private _snackbar: SnackbarService,
+    private _devicedetector: DeviceDetectorService,
+    private service: HttpService) { }
 
   logOut() {
     this.hamburgerClick();
-    sessionStorage.setItem('isLoggedIn', 'false');
-    sessionStorage.removeItem('authToken');
-    sessionStorage.removeItem('tokenExpiry');
-    sessionStorage.removeItem('loginUsername');
-    
-    this._snackbar.showSuccessMessage("You have been logged out successfully.");
-    this.router.navigate(['login']);
+    let api = environment.apis.signout;
+    this.service.logout(api).subscribe((data: any) => {
+      sessionStorage.setItem('isLoggedIn', 'false');
+      sessionStorage.removeItem('authToken');
+      sessionStorage.removeItem('tokenExpiry');
+      sessionStorage.removeItem('loginUsername');
+      this._snackbar.showSuccessMessage("You have been logged out successfully.");
+      this.router.navigate(['login']);
+    }, error => {
+      console.log("Error in saving data");
+      console.log(error);
+    });
   }
 
   hamburgerClick() {

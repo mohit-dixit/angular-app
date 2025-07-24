@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AppConfigService } from '../app-config.service';
 
@@ -41,5 +41,10 @@ export class HttpService {
   login(api : string, loginobject : any){
     const apiUrl = this.context + api;
     return this.http.post(apiUrl, loginobject);
+  }
+
+  logout(api: string) {
+    const apiUrl = this.context + api;
+    return this.http.post(apiUrl,null);
   }
 }

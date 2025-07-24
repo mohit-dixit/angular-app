@@ -4,6 +4,7 @@ export const environment = {
     department: 'departments',
     signup: 'signup',
     login: 'authenticate',
+    signout: 'signout',
   }  
 }
 
