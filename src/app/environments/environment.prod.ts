@@ -7,6 +7,7 @@ export const environment = {
     signout: 'signout',
     extend: 'extend',
     swagger: 'swagger-ui/index.html',
+    chat: 'chat'
   }  
 }
 

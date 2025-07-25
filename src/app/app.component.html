@@ -1,8 +1,11 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="mat-app-background basic-container">
   <app-sidepanel></app-sidepanel>
 </div>
-<!-- Loading spinner -->
+
+<!-- Spinner overlay controlled by loading state -->
 <div [hidden]="!loading">
   <app-spinner-customization></app-spinner-customization>
 </div>
+
+<!-- Global chatbot, always visible and fixed in lower right -->
+<app-chatbot></app-chatbot>

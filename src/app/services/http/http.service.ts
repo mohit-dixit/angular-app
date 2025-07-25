@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AppConfigService } from '../app-config.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -46,5 +47,10 @@ export class HttpService {
   logout(api: string) {
     const apiUrl = this.context + api;
     return this.http.post(apiUrl,null);
+  }
+
+  getChatResponse(api: string, prompt: string): Observable<{ response: string }> {
+    const apiUrl = this.context + api;
+    return this.http.post<{ response: string }>(apiUrl, { prompt });
   }
 }
