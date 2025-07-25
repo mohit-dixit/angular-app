@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 import { ModalComponent } from '../modal/modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TokenManagerService } from '../../services/tokenmanager/token-manager.service';
+import { AppConfigService } from '../../services/app-config.service';
 
 @Component({
   selector: 'app-sidepanel',
@@ -35,6 +36,7 @@ export class SidepanelComponent {
   @ViewChild('sidenav') sidenav!: MatSidenav;
   showSubmenu: boolean = true;
   time$!: Observable<number>;
+  private context: any;
 
   constructor(private router: Router,
     private _snackbar: SnackbarService,
@@ -42,8 +44,10 @@ export class SidepanelComponent {
     private service: HttpService,
     private timerService: TimerService,
     private _dialog: MatDialog,
-    private _tokenService: TokenManagerService) {
+    private _tokenService: TokenManagerService,
+  private configService: AppConfigService) {
     this.time$ = this.timerService.time$;
+    this.context = this.configService.getConfig().context;
   }
 
   logOut() {
@@ -106,5 +110,9 @@ export class SidepanelComponent {
         toShowExtendButton: toShowExtendButton
       }
     });
+  }
+
+  swagger() {
+    window.open(this.context + environment.apis.swagger, '_blank');
   }
 }

@@ -16,6 +16,7 @@
                 <a mat-list-item routerLink="samplecrud" (click)="hideOnMobile();" routerLinkActive="active">Sample Live CRUD Operations</a>
                 <a mat-list-item routerLink="pagenotfound" (click)="hideOnMobile();" routerLinkActive="active">Sample 404 Not found Page</a>
                 <a mat-list-item routerLink="aboutme" (click)="this.sidenav.toggle();" routerLinkActive="active">About Me</a>
+                <strong><a mat-list-item (click)="swagger();" routerLinkActive="active">SWAGGER - For API's Used</a></strong>
                 <a mat-list-item class="logoutlink" (click)="logOut()">Log Out</a>
                 <!-- <mat-list-item (click)="showSubSubMenu = !showSubSubMenu" class="parent">
                     <span class="full-width" *ngIf="isExpanded || isShowing"></span>

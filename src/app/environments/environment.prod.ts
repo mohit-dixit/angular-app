@@ -6,6 +6,7 @@ export const environment = {
     login: 'authenticate',
     signout: 'signout',
     extend: 'extend',
+    swagger: 'swagger-ui/index.html',
   }  
 }
 
