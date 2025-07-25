@@ -13,6 +13,7 @@ import { TimerService } from '../../services/timer/timer.service';
 import { Observable } from 'rxjs';
 import { ModalComponent } from '../modal/modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import { TokenManagerService } from '../../services/tokenmanager/token-manager.service';
 
 @Component({
   selector: 'app-sidepanel',
@@ -40,7 +41,8 @@ export class SidepanelComponent {
     private _devicedetector: DeviceDetectorService,
     private service: HttpService,
     private timerService: TimerService,
-    private _dialog : MatDialog) {
+    private _dialog: MatDialog,
+    private _tokenService: TokenManagerService) {
     this.time$ = this.timerService.time$;
   }
 
@@ -48,10 +50,7 @@ export class SidepanelComponent {
     this.hamburgerClick();
     let api = environment.apis.signout;
     this.service.logout(api).subscribe((data: any) => {
-      sessionStorage.setItem('isLoggedIn', 'false');
-      sessionStorage.removeItem('authToken');
-      sessionStorage.removeItem('tokenExpiry');
-      sessionStorage.removeItem('loginUsername');
+      this._tokenService.clearToken();
       this._snackbar.showSuccessMessage("You have been logged out successfully.");
       this.router.navigate(['login']);
     }, error => {
@@ -64,16 +63,17 @@ export class SidepanelComponent {
     if (this.sidenav) {
       this.sidenav.toggle();
     }
-  }  
+  }
 
-  isLoggedIn(){  
-    const isLoggedIn = sessionStorage.getItem('isLoggedIn');
-    return isLoggedIn === 'true';    
+  isLoggedIn() {
+    let isloggedIn = this._tokenService.isTokenExpired();
+    
+    return !isloggedIn;
   }
 
   hideOnMobile() {
     const isMobile = this._devicedetector.isMobile();
-    if(isMobile){
+    if (isMobile) {
       this.hamburgerClick();
     }
   }
@@ -82,17 +82,29 @@ export class SidepanelComponent {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     console.log(`Time remaining: ${mins} minutes and ${secs} seconds`);
-    if(mins === 0 && secs === 1 && this._dialog.openDialogs.length === 0) {
-      this._dialog.open(ModalComponent, {
+    if (this._dialog.openDialogs.length === 0) {
+      if (mins === 0 && secs === 59) {
+        const msg = "Your session is going to Expire. Do you want to extend it?";
+        this.openSessionExpiredDialog(msg, true);
+      }
+      else if (mins === 0 && secs === 1) {
+        this._dialog.closeAll();
+        const msg = "Your session has expired. Please log in again.";
+        this.openSessionExpiredDialog(msg, false);
+      }
+    }
+    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  }
+
+  openSessionExpiredDialog(msg: string, toShowExtendButton: boolean): void {
+    this._dialog.open(ModalComponent, {
       width: '750px',
       closeOnNavigation: true,
       disableClose: true,
       data: {
-        message: "Your session has expired. Please log in again."
-      }      
+        message: msg,
+        toShowExtendButton: toShowExtendButton
+      }
     });
-    this._snackbar.showErrorMessage("Your session has expired. Please log in again.");
-    }
-    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
   }
 }

@@ -1,5 +1,7 @@
-<h2 mat-dialog-title>Session Expired</h2>
+<h2 mat-dialog-title>Session Expiry Info</h2>
 <mat-dialog-content>{{message}}</mat-dialog-content>
 <mat-dialog-actions>
-  <button matButton (click)="closeDialogAndNavigateToLogin()">Take Me to Login</button>
+  <button matButton *ngIf="toShowExtendButton" (click)="extendToken()">Extend Session</button>
+  <button matButton class="cancelbtn" *ngIf="toShowExtendButton" (click)="cancelPopup()">Cancel</button>
+  <button matButton *ngIf="!toShowExtendButton" (click)="closeDialogAndNavigateToLogin()">Take Me to Login</button>
 </mat-dialog-actions>

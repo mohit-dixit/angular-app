@@ -5,7 +5,7 @@ import { BehaviorSubject, interval, Subscription } from 'rxjs';
   providedIn: 'root'
 })
 export class TimerService {
-  private totalSeconds = 60;
+  private totalSeconds = 120; // Default countdown - 2 minutes
   private timerSubscription!: Subscription;
   private timeSubject = new BehaviorSubject<number>(0);
   time$ = this.timeSubject.asObservable();

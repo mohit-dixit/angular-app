@@ -7,6 +7,7 @@ import { environment } from '../../environments/environment';
 import { filter, Subscription } from 'rxjs';
 import { SnackbarService } from '../../services/snackbar/snackbar.service';
 import { TimerService } from '../../services/timer/timer.service';
+import { TokenManagerService } from '../../services/tokenmanager/token-manager.service';
 
 @Component({
   selector: 'app-login',
@@ -20,19 +21,17 @@ export class LoginComponent {
   loginForm!: FormGroup;
   private routerSubscription: Subscription;
 
-  constructor(private router: Router, 
-      private _fb: FormBuilder, 
-      private _httpservice: HttpService, 
-      private _snackbar: SnackbarService,
-      private timerService: TimerService) { 
+  constructor(private router: Router,
+    private _fb: FormBuilder,
+    private _httpservice: HttpService,
+    private _snackbar: SnackbarService,
+    private _timerService: TimerService,
+    private _tokenService: TokenManagerService) {
     this.routerSubscription = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
       if (event.urlAfterRedirects === '/login') {
-        sessionStorage.setItem('isLoggedIn', 'false');
-        sessionStorage.removeItem('authToken');
-        sessionStorage.removeItem('tokenExpiry');
-        sessionStorage.removeItem('loginUsername');
+        this._tokenService.clearToken();
       }
     });
   }
@@ -77,8 +76,8 @@ export class LoginComponent {
         password: this.signUpForm.value.password
       }
       this._httpservice.savedata(api, saveobject).subscribe((data: any) => {
-        if(data) {
-          if(data.success){
+        if (data) {
+          if (data.success) {
             this.signUpForm.reset();
             this._snackbar.showSuccessMessage(data.message);
           }
@@ -87,10 +86,10 @@ export class LoginComponent {
           }
         }
       }, error => {
-        if(error && error.error && error.error.text){
+        if (error && error.error && error.error.text) {
           this._snackbar.showErrorMessage(error.error.text);
         }
-        else{
+        else {
           this._snackbar.showErrorMessage("Error in creating User. Please check the logs.");
         }
       });
@@ -106,9 +105,10 @@ export class LoginComponent {
     });
 
     if (this.loginForm.valid
-      && this.loginForm.value.username && this.loginForm.value.password) {
+      && this.loginForm.value.username &&
+      this.loginForm.value.password) {
 
-       let loginobject = {
+      let loginobject = {
         username: this.loginForm.value.username,
         password: this.loginForm.value.password
       }
@@ -116,14 +116,11 @@ export class LoginComponent {
       let api = environment.apis.login;
       this._httpservice.login(api, loginobject).subscribe((data: any) => {
         if (data && data.success) {
-          sessionStorage.setItem('isLoggedIn', 'true');
-          sessionStorage.setItem('authToken', data.token);
-          sessionStorage.setItem('tokenExpiry', data.tokenExpiry);
-          sessionStorage.setItem('loginUsername', data.username);
+          this._tokenService.setToken(data.token, new Date(data.tokenExpiry), data.username);
           this._snackbar.showSuccessMessage("Login Successful");
+          this._timerService.resetTimer();
+          this._timerService.startTimer();
           this.loginForm.reset();
-          this.timerService.resetTimer();
-          this.timerService.startTimer();
           this.router.navigate(['home']);
         }
         else if (data && !data.success && data.message) {
@@ -135,7 +132,7 @@ export class LoginComponent {
       });
     }
     else {
-      sessionStorage.setItem('isLoggedIn', 'false');
+      this._tokenService.clearToken();
     }
   }
 

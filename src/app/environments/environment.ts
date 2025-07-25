@@ -5,6 +5,7 @@ export const environment = {
     signup: 'signup',
     login: 'authenticate',
     signout: 'signout',
+    extend: 'extend',
   }  
 }
 

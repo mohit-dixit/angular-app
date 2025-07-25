@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TokenManagerService } from '../../services/tokenmanager/token-manager.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,11 +9,14 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
-  username = sessionStorage.getItem('loginUsername');
+  username : any;
 
-  constructor() { }
+  constructor(private _tokenService : TokenManagerService) { 
+     this.username = _tokenService.getLoginUserName();
+  }
 
   ngOnInit() {
+    
   }
 
 }

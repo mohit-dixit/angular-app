@@ -11,9 +11,9 @@ export const authGuard: CanActivateFn = (route, state) => {
   const _tokenService = inject(TokenManagerService);
   const _dialog = inject(MatDialog);
 
-  const isloggedIn = sessionStorage.getItem('isLoggedIn');
+  const isloggedIn = !_tokenService.isTokenExpired(); 
 
-  if (isloggedIn === 'false' || isloggedIn === null) {
+  if (isloggedIn === false || isloggedIn === null) {
     _snackbar.showErrorMessage("You are not logged in. Please log in to access this page.");
 
     _router.navigate(['login']);
@@ -21,17 +21,17 @@ export const authGuard: CanActivateFn = (route, state) => {
   }
 
   if (_tokenService.isTokenExpired()) {
-    // _dialog.open(ModalComponent, {
-    //   width: '750px',
-    //   closeOnNavigation: true,
-    //   disableClose: true,
-    //   data: {
-    //     message: "Your session has expired. Please log in again."
-    //   }      
-    // });
-    // _snackbar.showErrorMessage("Your session has expired. Please log in again.");
+    _dialog.open(ModalComponent, {
+      width: '750px',
+      closeOnNavigation: true,
+      disableClose: true,
+      data: {
+        message: "Your session has expired. Please log in again."
+      }      
+    });
+    _snackbar.showErrorMessage("Your session has expired. Please log in again.");
 
-    // return false;
+    return false;
   }
 
   return true;
