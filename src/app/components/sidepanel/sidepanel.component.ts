@@ -86,15 +86,16 @@ export class SidepanelComponent {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     console.log(`Time remaining: ${mins} minutes and ${secs} seconds`);
-    if (this._dialog.openDialogs.length === 0) {
+    if (mins === 0 && secs === 1) {
+      this._dialog.closeAll();
+      const msg = "Your session has expired. Please log in again.";
+      this.openSessionExpiredDialog(msg, false);
+      this.router.navigate(['login']);
+    }
+    else if (this._dialog.openDialogs.length === 0) {
       if (mins === 0 && secs === 59) {
         const msg = "Your session is going to Expire. Do you want to extend it?";
         this.openSessionExpiredDialog(msg, true);
-      }
-      else if (mins === 0 && secs === 1) {
-        this._dialog.closeAll();
-        const msg = "Your session has expired. Please log in again.";
-        this.openSessionExpiredDialog(msg, false);
       }
     }
     return `${mins}:${secs < 10 ? '0' : ''}${secs}`;

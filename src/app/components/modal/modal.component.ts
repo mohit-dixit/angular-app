@@ -58,13 +58,7 @@ export class ModalComponent {
 
   }
 
-  closeDialogAndNavigateToLogin() {
-    this._dialog.closeAll();
-    this._tokenService.clearToken();
-    this._router.navigate(['login']);
-  }
-
-  cancelPopup() {
+  closePopup() {
     this._dialog.closeAll();
   }
 }
