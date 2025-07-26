@@ -103,3 +103,33 @@ button:hover{
 	color: blue;
 	font-size: 0.8em;
 }
+
+
+/* Fixed marquee at the very top, overlays content */
+.marquee-container {
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 1000;
+  background: rgba(30, 30, 60, 0.96);
+  border-bottom: 1px solid #463789;
+}
+
+.marquee {
+  display: inline-block;
+  white-space: nowrap;
+  color: #ffe082;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 11px 0;
+  letter-spacing: 0.7px;
+  animation: marquee-left 14s linear infinite;
+  width: 100vw;
+}
+
+@keyframes marquee-left {
+  0% { transform: translateX(100%);}
+  100% { transform: translateX(-100%);}
+}

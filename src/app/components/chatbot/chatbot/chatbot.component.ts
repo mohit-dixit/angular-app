@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgFor, NgClass } from '@angular/common';
+import { NgFor, NgClass, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChatbotStateService } from '../../../services/chatmessage/chatbotstate.service';
 import { HttpService } from '../../../services/http/http.service';
@@ -8,13 +8,14 @@ import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-chatbot',
   standalone: true,
-  imports: [NgFor, NgClass, FormsModule],
+  imports: [NgFor, NgClass, FormsModule, CommonModule],
   templateUrl: './chatbot.component.html',
   styleUrls: ['./chatbot.component.scss']
 })
 export class ChatbotComponent {
   messages: any;
   userInput = '';
+  showChatBox = false;
 
   constructor(private state: ChatbotStateService,
     private _httpservice: HttpService) {

@@ -1,6 +1,7 @@
-<div class="chatbot-container">
+<div *ngIf="showChatBox" class="chatbot-container">
   <div class="chat-header">
-    <h3>AI Chatbot</h3>
+    <button class="close-button closebtn" (click)="showChatBox = false">X</button>
+    <h3>I am here to help you!</h3>
   </div>
   <div class="chat-messages">
     <div *ngFor="let message of messages"
@@ -19,3 +20,4 @@
     <button type="submit">Send</button>
   </form>
 </div>
+<img *ngIf="!showChatBox" src="/assets/images/robot.png" height="80px" width="80px" (click)="showChatBox = !showChatBox" />
