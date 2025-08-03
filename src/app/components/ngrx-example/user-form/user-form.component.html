@@ -1,0 +1,21 @@
+<br>
+<div style="margin-left: 40px;">
+  <form [formGroup]="userForm" (ngSubmit)="submit()">
+    <input formControlName="firstname" placeholder="First Name" />
+    <input style="margin-left: 5px;" formControlName="lastname" placeholder="Last Name" />
+    <button style="margin-left: 5px;" type="submit">Add User</button>
+  </form>
+  <ul>
+    <li style="color: blue;" *ngFor="let user of users$ | async">
+      {{ user.firstname }} - {{ user.lastname }}
+    </li>
+  </ul>
+  <br>
+  <strong>Summary of functionality of this page:</strong><br><br>
+  ☸ The above list (if any) is populated with users saved in NGRX store.<br>
+  ☸ You can add a user using the form above.<br>
+  ☸ The list will update automatically when a new user is added.<br>
+  ☸ The form uses Angular Reactive Forms for validation and state management.<br>
+  ☸ The state is managed using NGRX, which allows for a predictable state container<br>
+  ☸ You can check in the browser debugger tools Redux dev tool section.<br>
+</div>
