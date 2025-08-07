@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, interval, Subscription } from 'rxjs';
+import { TokenManagerService } from '../tokenmanager/token-manager.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TimerService {
-  private totalSeconds = 120; // Default countdown - 2 minutes
+  private totalSeconds = 0; // Default countdown - 0 minutes
   private timerSubscription!: Subscription;
   private timeSubject = new BehaviorSubject<number>(0);
   time$ = this.timeSubject.asObservable();
@@ -13,7 +14,12 @@ export class TimerService {
   private timerRunning = false;
   private STORAGE_KEY = 'countdown-end-time';
 
-  constructor() {
+  constructor(private _tokenService: TokenManagerService) {
+    this._tokenService.getTimeout().subscribe((seconds: bigint) => {
+      if (seconds) {
+        this.totalSeconds = Number(seconds);
+      }
+    });
     this.resumeTimerIfExists(); // Check on init
   }
 

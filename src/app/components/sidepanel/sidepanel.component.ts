@@ -38,25 +38,25 @@ export class SidepanelComponent {
   time$!: Observable<number>;
   private context: any;
 
-  constructor(private router: Router,
+  constructor(private _router: Router,
     private _snackbar: SnackbarService,
     private _devicedetector: DeviceDetectorService,
-    private service: HttpService,
-    private timerService: TimerService,
+    private _service: HttpService,
+    private _timerService: TimerService,
     private _dialog: MatDialog,
     private _tokenService: TokenManagerService,
-  private configService: AppConfigService) {
-    this.time$ = this.timerService.time$;
-    this.context = this.configService.getConfig().context;
+    private _configService: AppConfigService
+  ) {
+    this.time$ = this._timerService.time$;
+    this.context = this._configService.getConfig().context;
   }
 
   logOut() {
     this.hamburgerClick();
     let api = environment.apis.signout;
-    this.service.logout(api).subscribe((data: any) => {
-      this._tokenService.clearToken();
+    this._service.logout(api).subscribe((data: any) => {
       this._snackbar.showSuccessMessage("You have been logged out successfully.");
-      this.router.navigate(['login']);
+      this._router.navigate(['login']);
     }, error => {
       console.log("Error in saving data");
       console.log(error);
@@ -70,9 +70,7 @@ export class SidepanelComponent {
   }
 
   isLoggedIn() {
-    let isloggedIn = this._tokenService.isTokenExpired();
-    
-    return !isloggedIn;
+    return this._tokenService.isUserLoggedIn();
   }
 
   hideOnMobile() {
@@ -85,12 +83,11 @@ export class SidepanelComponent {
   formatTime(seconds: number): string {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    console.log(`Time remaining: ${mins} minutes and ${secs} seconds`);
     if (mins === 0 && secs === 1) {
       this._dialog.closeAll();
       const msg = "Your session has expired. Please log in again.";
       this.openSessionExpiredDialog(msg, false);
-      this.router.navigate(['login']);
+      this._router.navigate(['login']);
     }
     else if (this._dialog.openDialogs.length === 0) {
       if (mins === 0 && secs === 59) {

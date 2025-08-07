@@ -6,7 +6,10 @@ import { throwError } from 'rxjs';
 
 export const httpRequestInterceptor: HttpInterceptorFn = (req, next) => {
   const loading = inject(LoadingService);
-  loading.setLoading(true, req.url);
+  const excludedUrls = ['istokenexpired'];
+  if (!excludedUrls.some(url => req.url.includes(url))) {
+    loading.setLoading(true, req.url);
+  }
   return next(req).pipe(
     catchError((err) => {
       loading.setLoading(false, req.url);

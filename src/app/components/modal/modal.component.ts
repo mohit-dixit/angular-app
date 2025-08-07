@@ -34,15 +34,10 @@ export class ModalComponent {
   }
 
   extendToken() {
-
-    let loginobject = {
-      username: this._tokenService.getLoginUserName(),
-    }
-
     let api = environment.apis.extend;
-    this._httpservice.login(api, loginobject).subscribe((data: any) => {
+    this._httpservice.login(api, null).subscribe((data: any) => {
       if (data && data.success) {
-        this._tokenService.setToken(data.token, new Date(data.tokenExpiry), data.username);
+        this._tokenService.setLoginUserName(data.username);
         this._snackbar.showSuccessMessage("Session Extended Successfully");
         this._timerService.resetTimer();
         this._timerService.startTimer();

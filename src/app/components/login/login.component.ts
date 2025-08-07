@@ -27,13 +27,15 @@ export class LoginComponent {
     private _snackbar: SnackbarService,
     private _timerService: TimerService,
     private _tokenService: TokenManagerService) {
+
     this.routerSubscription = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
       if (event.urlAfterRedirects === '/login') {
-        this._tokenService.clearToken();
+        this._tokenService.removeLoginUserName();
       }
     });
+    
   }
 
   ngOnInit() {
@@ -116,8 +118,8 @@ export class LoginComponent {
       let api = environment.apis.login;
       this._httpservice.login(api, loginobject).subscribe((data: any) => {
         if (data && data.success) {
-          this._tokenService.setToken(data.token, new Date(data.tokenExpiry), data.username);
-          this._snackbar.showSuccessMessage("Login Successful");
+          this._tokenService.setLoginUserName(data.username);
+          this._snackbar.showSuccessMessage(data.message);
           this._timerService.resetTimer();
           this._timerService.startTimer();
           this.loginForm.reset();
@@ -132,7 +134,7 @@ export class LoginComponent {
       });
     }
     else {
-      this._tokenService.clearToken();
+      this._tokenService.removeLoginUserName();
     }
   }
 

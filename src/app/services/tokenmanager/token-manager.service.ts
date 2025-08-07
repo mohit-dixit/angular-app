@@ -1,39 +1,50 @@
 import { Injectable } from '@angular/core';
+import { HttpService } from '../http/http.service';
+import { environment } from '../../environments/environment';
+import { EncryptionService } from '../encryption/encryption.service';
+import { catchError, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenManagerService {
 
-  getToken(): string | null {
-    return sessionStorage.getItem('authToken');
+  constructor(private _httpservice: HttpService,
+    private _encryptionService: EncryptionService
+  ) { }
+
+  isUserLoggedIn(): boolean {
+    return !!this.getLoginUserName();
   }
 
-  isTokenExpired(): boolean {
-    const expiryStr = sessionStorage.getItem('tokenExpiry');
-    if (!expiryStr) return true;
-    const expiry = new Date(expiryStr).getTime();
-    const now = new Date().getTime();
-    return now >= expiry;
+  removeLoginUserName(): void {
+    localStorage.removeItem('loginUsername');
   }
 
-  clearToken(): void {
-    sessionStorage.removeItem('authToken');
-    sessionStorage.removeItem('tokenExpiry');
-    sessionStorage.removeItem('loginUsername');
-  }
-
-  setToken(token: string, expiry: Date, username: string): void {
-    sessionStorage.setItem('authToken', token);
-    sessionStorage.setItem('tokenExpiry', expiry.toISOString());
-    sessionStorage.setItem('loginUsername', username);
+  setLoginUserName(username: string): void {
+    const encrypted = this._encryptionService.encrypt(username);
+    localStorage.setItem('loginUsername', encrypted);
   }
 
   getLoginUserName(): string | null {
-    return sessionStorage.getItem('loginUsername');
+    const encrypted = localStorage.getItem('loginUsername');
+    if (encrypted) {
+      return this._encryptionService.decrypt(encrypted);
+    }
+    return null;
   }
 
-  getTokenExpiry(): string | null {
-    return sessionStorage.getItem('tokenExpiry');
+  checkIfTokenexpired(): Observable<boolean> {
+    const api = environment.apis.isTokenExpired;
+    return this._httpservice.istokenexpired(api).pipe(
+      catchError(() => of(true)) // default to expired if error
+    );
   }
+
+  getTimeout(): Observable<bigint> {
+    const api = environment.apis.getTimeout;
+    return this._httpservice.getTimeout(api).pipe(
+      catchError(() => of(BigInt(0))) // default to 0 if error
+    );
+  }  
 }
