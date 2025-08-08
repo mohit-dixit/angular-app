@@ -1,1 +1,40 @@
-Welcome {{username}}
+<div class="dashboard-grid">
+
+
+  <mat-card class="card wide-card">
+    <mat-card-title>Browser Usage (Pie)</mat-card-title>
+    <canvas baseChart [data]="pieChartConfig.data" [type]="pieChartConfig.type"
+      [options]="pieChartConfig.options"></canvas>
+  </mat-card>
+
+  <mat-card class="card wide-card">
+    <mat-card-title>Data Usage (Doughnut)</mat-card-title>
+    <canvas baseChart [data]="doughnutChartConfig.data" [type]="doughnutChartConfig.type"
+      [options]="doughnutChartConfig.options"></canvas>
+  </mat-card>
+
+  <mat-card class="card wide-card">
+    <mat-card-title>Player Stats (Radar)</mat-card-title>
+    <canvas baseChart [data]="radarChartConfig.data" [type]="radarChartConfig.type"
+      [options]="radarChartConfig.options"></canvas>
+  </mat-card>
+
+  <mat-card class="card wide-card">
+    <mat-card-title>Color Metrics (Polar Area)</mat-card-title>
+    <canvas baseChart [data]="polarAreaChartConfig.data" [type]="polarAreaChartConfig.type"
+      [options]="polarAreaChartConfig.options"></canvas>
+  </mat-card>
+
+  <mat-card class="card wide-card">
+    <mat-card-title>Average Weekly Sales</mat-card-title>
+    <canvas baseChart [data]="lineChartConfig.data" [type]="lineChartConfig.type"
+      [options]="lineChartConfig.options"></canvas>
+  </mat-card>
+
+  <mat-card class="card wide-card">
+    <mat-card-title>Sales & Views</mat-card-title>
+    <canvas baseChart [data]="barChartConfig.data" [type]="barChartConfig.type"
+      [options]="barChartConfig.options"></canvas>
+  </mat-card>
+
+</div>

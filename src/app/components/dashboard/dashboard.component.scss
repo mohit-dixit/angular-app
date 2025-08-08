@@ -1,0 +1,32 @@
+.dashboard-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(10%, 1fr));
+  padding: 1rem;
+}
+
+.card {
+  padding: 1rem;
+}
+
+.large-card {
+  grid-column: span 2;
+}
+
+.wide-card {
+  grid-column: span 3;
+}
+
+.stat-card {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
