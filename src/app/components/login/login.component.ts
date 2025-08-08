@@ -32,7 +32,7 @@ export class LoginComponent {
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
       if (event.urlAfterRedirects === '/login') {
-        this._tokenService.removeLoginUserName();
+        this.logOut();        
       }
     });
     
@@ -136,6 +136,18 @@ export class LoginComponent {
     else {
       this._tokenService.removeLoginUserName();
     }
+  }
+
+  logOut() {
+    this._tokenService.removeLoginUserName();
+    this._timerService.resetTimer();
+    let api = environment.apis.signout;
+    this._httpservice.logout(api).subscribe((data: any) => {      
+      this._snackbar.showSuccessMessage("You have been logged out successfully.");
+    }, error => {
+      console.log("Error in saving data");
+      console.log(error);
+    });
   }
 
   ngOnDestroy(): void {

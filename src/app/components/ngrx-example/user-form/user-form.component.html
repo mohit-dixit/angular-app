@@ -3,7 +3,7 @@
   <form [formGroup]="userForm" (ngSubmit)="submit()">
     <input formControlName="firstname" placeholder="First Name" />
     <input style="margin-left: 5px;" formControlName="lastname" placeholder="Last Name" />
-    <button style="margin-left: 5px;" type="submit">Add User</button>
+    <button style="margin-left: 5px;" class="beautiful-button" type="submit">Add User</button>
   </form>
   <ul>
     <li style="color: blue;" *ngFor="let user of users$ | async">

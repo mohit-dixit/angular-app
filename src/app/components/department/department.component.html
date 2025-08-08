@@ -2,7 +2,7 @@
   <input [(ngModel)]="txtName" type="text" name="txtName" id="txtName">
   <button [disabled]="!txtName" class="beautiful-button" *ngIf="!this.selectedDepartmentId"
     (click)="saveButtonClick()">Save</button>
-  <button [disabled]="!txtName" style="margin-left: 5px;" *ngIf="this.selectedDepartmentId"
+  <button [disabled]="!txtName" class="beautiful-button" style="margin-left: 5px;" *ngIf="this.selectedDepartmentId"
     (click)="updateButtonClick()">Update</button>
   <label style="margin-left: 10px;" *ngIf="!txtName" class="glowing-text" id="lblSaveConf">{{lblConfirmation}}</label>
   <div *ngIf="allDepartments && allDepartments.length > 0">

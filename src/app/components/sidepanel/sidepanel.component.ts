@@ -54,13 +54,7 @@ export class SidepanelComponent {
   logOut() {
     this.hamburgerClick();
     let api = environment.apis.signout;
-    this._service.logout(api).subscribe((data: any) => {
-      this._snackbar.showSuccessMessage("You have been logged out successfully.");
-      this._router.navigate(['login']);
-    }, error => {
-      console.log("Error in saving data");
-      console.log(error);
-    });
+    this._router.navigate(['login']);
   }
 
   hamburgerClick() {

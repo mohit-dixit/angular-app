@@ -12,6 +12,7 @@ import { User } from '../../../store/user.reducer';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './user-form.component.html',
+  styleUrl: './user-form.component.scss'
 })
 export class UserFormComponent {
   userForm!: FormGroup;

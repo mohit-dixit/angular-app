@@ -1,28 +1,32 @@
-table {
-  width: 80%;
-  border-collapse: collapse;
-  margin: 20px auto;
+ul {
+  width: 40%;
+  padding: 0;
+  list-style-type: none;
   font-family: Arial, sans-serif;
-}
-
-th, td {
   border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden; 
+}
+
+ul > li {
+  display: flex;
+  border-top: 1px solid #ddd;
   padding: 10px;
-  text-align: left;
 }
 
-th {
-  background-color: #065AAE;
-  color: white;
-}
-
-tbody tr:nth-child(even) {
+ul > li:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-tbody tr:hover {
+ul > li:hover {
   background-color: #ddd;
 }
+
+ul > li > span {
+  flex: 1;
+  text-align: left;
+}
+
 
 .glowing-text {
   color: #fff; /* White text for a glowing effect */
