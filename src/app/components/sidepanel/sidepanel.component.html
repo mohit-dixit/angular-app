@@ -1,6 +1,8 @@
 <mat-toolbar color="primary" *ngIf="isLoggedIn()" class="example-toolbar toppanel">
     <button mat-icon-button (click)="hamburgerClick()"><mat-icon>menu</mat-icon></button>
     <h1 class="example-app-name headingclass">Angular 19 + Spring Boot + PostgreSQL Application by Mohit Dixit</h1>
+    <span class="spacer"></span>
+    <img src="assets/images/logout.png" (click)="logOut()" class="logout" alt="Profile Image">
 </mat-toolbar>
 <mat-sidenav-container class="example-container" autosize>
     <mat-sidenav #sidenav *ngIf="isLoggedIn()" class="example-sidenav" mode="side" opened="true">
@@ -12,13 +14,18 @@
             </mat-list-item>
             <div class="submenu" [ngClass]="{'expanded' : showSubmenu}">
                 <a mat-list-item routerLink="home" (click)="hideOnMobile();" routerLinkActive="active">Dashboard</a>
-                <a mat-list-item routerLink="overview" (click)="hideOnMobile();" routerLinkActive="active">Application Overview</a>
-                <a mat-list-item routerLink="samplecrud" (click)="hideOnMobile();" routerLinkActive="active">Sample Live CRUD Operations</a>
-                <a mat-list-item routerLink="ngrxexample" (click)="hideOnMobile();" routerLinkActive="active">NGRX State Management Example</a>
-                <a mat-list-item routerLink="pagenotfound" (click)="hideOnMobile();" routerLinkActive="active">Sample 404 Not found Page</a>
-                <strong><a mat-list-item (click)="swagger();" routerLinkActive="active">SWAGGER - For API's Used</a></strong>
-                <a mat-list-item routerLink="aboutme" (click)="this.sidenav.toggle();" routerLinkActive="active">About Me</a>
-                <a mat-list-item class="logoutlink" (click)="logOut()">Log Out</a>
+                <a mat-list-item routerLink="overview" (click)="hideOnMobile();" routerLinkActive="active">Application
+                    Overview</a>
+                <a mat-list-item routerLink="samplecrud" (click)="hideOnMobile();" routerLinkActive="active">Sample Live
+                    CRUD Operations</a>
+                <a mat-list-item routerLink="ngrxexample" (click)="hideOnMobile();" routerLinkActive="active">NGRX State
+                    Management Example</a>
+                <a mat-list-item routerLink="pagenotfound" (click)="hideOnMobile();" routerLinkActive="active">Sample
+                    404 Not found Page</a>
+                <strong><a mat-list-item (click)="swagger();" routerLinkActive="active">SWAGGER - For API's
+                        Used</a></strong>
+                <a mat-list-item routerLink="aboutme" (click)="this.sidenav.toggle();" routerLinkActive="active">About
+                    Me</a>
                 <!-- <mat-list-item (click)="showSubSubMenu = !showSubSubMenu" class="parent">
                     <span class="full-width" *ngIf="isExpanded || isShowing"></span>
                     <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubSubMenu}"
@@ -30,11 +37,12 @@
                 </div> -->
             </div>
         </mat-nav-list>
-       <p style="margin-left: 10px;" *ngIf="time$ | async as time">Your session will expire in: <strong style="color: red;">{{ formatTime(time) }}</strong></p>
+        <p style="margin-left: 10px;" *ngIf="time$ | async as time">Your session will expire in: <strong
+                style="color: red;">{{ formatTime(time) }}</strong></p>
         <mat-nav-list>
         </mat-nav-list>
     </mat-sidenav>
     <div>
-        <router-outlet></router-outlet>              
-    </div>   
+        <router-outlet></router-outlet>
+    </div>
 </mat-sidenav-container>

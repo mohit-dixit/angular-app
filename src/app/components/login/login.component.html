@@ -1,27 +1,47 @@
 <!DOCTYPE html>
-<html>    
+<html>
+
 <body>
     <div class="marquee-container">
-    <div class="marquee">This application is best viewed in Google Chrome on desktop or laptop.</div>
-  </div>
+        <div class="marquee">This application is best viewed in Google Chrome on desktop or laptop.</div>
+    </div>
     <div class="main">
         <input type="checkbox" id="chk" checked aria-hidden="true">
         <div class="signup">
             <form [formGroup]="signUpForm">
                 <label for="chk" aria-hidden="true">Sign up</label>
                 <input type="text" name="username" placeholder="User Name" formControlName="username">
-                    <span class="error" *ngIf="signUpForm.get('username')?.hasError('required') && signUpForm.get('username')?.touched">Username is required</span>
-                    <span class="error" *ngIf="signUpForm.get('username')?.hasError('minlength') && signUpForm.get('username')?.touched">Username must be at least 5 characters</span>
-                    <span class="error" *ngIf="signUpForm.get('username')?.hasError('maxlength') && signUpForm.get('username')?.touched">Username cannot exceed 20 characters</span>
-                <input type="email" name="email" placeholder="Email"  formControlName="email">
-                    <span class="error" *ngIf="signUpForm.get('email')?.hasError('required') && signUpForm.get('email')?.touched">Email is required</span>
-                    <span class="error" *ngIf="signUpForm.get('email')?.hasError('email') && signUpForm.get('email')?.touched">Invalid email format</span>
-                <input type="password" name="password" placeholder="Password"  formControlName="password">
-                    <span class="error" *ngIf="signUpForm.get('password')?.hasError('required') && signUpForm.get('password')?.touched">Password is required</span>
-                    <span class="error" *ngIf="signUpForm.get('password')?.hasError('minlength') && signUpForm.get('password')?.touched">Password must be at least 6 characters</span>
-                    <span class="error" *ngIf="signUpForm.get('password')?.hasError('maxlength') && signUpForm.get('password')?.touched">Password cannot exceed 20 characters</span>
-                <input type="password" name="confirmpassword" placeholder="Confirm Password"  formControlName="confirmpassword">
-                    <span class="error" *ngIf="signUpForm.get('confirmpassword')?.touched && (signUpForm.get('password')?.value !== signUpForm.get('confirmpassword')?.value)">Passwords do not match</span>
+                <span class="error"
+                    *ngIf="signUpForm.get('username')?.hasError('required') && signUpForm.get('username')?.touched">Username
+                    is required</span>
+                <span class="error"
+                    *ngIf="signUpForm.get('username')?.hasError('minlength') && signUpForm.get('username')?.touched">Username
+                    must be at least 5 characters</span>
+                <span class="error"
+                    *ngIf="signUpForm.get('username')?.hasError('maxlength') && signUpForm.get('username')?.touched">Username
+                    cannot exceed 20 characters</span>
+                <input type="email" name="email" placeholder="Email" formControlName="email">
+                <span class="error"
+                    *ngIf="signUpForm.get('email')?.hasError('required') && signUpForm.get('email')?.touched">Email is
+                    required</span>
+                <span class="error"
+                    *ngIf="signUpForm.get('email')?.hasError('email') && signUpForm.get('email')?.touched">Invalid email
+                    format</span>
+                <input type="password" name="password" placeholder="Password" formControlName="password">
+                <span class="error"
+                    *ngIf="signUpForm.get('password')?.hasError('required') && signUpForm.get('password')?.touched">Password
+                    is required</span>
+                <span class="error"
+                    *ngIf="signUpForm.get('password')?.hasError('minlength') && signUpForm.get('password')?.touched">Password
+                    must be at least 6 characters</span>
+                <span class="error"
+                    *ngIf="signUpForm.get('password')?.hasError('maxlength') && signUpForm.get('password')?.touched">Password
+                    cannot exceed 20 characters</span>
+                <input type="password" name="confirmpassword" placeholder="Confirm Password"
+                    formControlName="confirmpassword">
+                <span class="error"
+                    *ngIf="signUpForm.get('confirmpassword')?.touched && (signUpForm.get('password')?.value !== signUpForm.get('confirmpassword')?.value)">Passwords
+                    do not match</span>
                 <button *ngIf="signUpForm.valid" (click)="signUp()">Sign up</button>
             </form>
         </div>
@@ -29,18 +49,30 @@
             <form [formGroup]="loginForm">
                 <label for="chk" aria-hidden="true">Login</label>
                 <input type="text" name="username" placeholder="User Name" formControlName="username">
-                    <span class="error" *ngIf="loginForm.get('username')?.hasError('required') && loginForm.get('username')?.touched">Username is required</span>
-                    <span class="error" *ngIf="loginForm.get('username')?.hasError('minlength') && loginForm.get('username')?.touched">Username must be at least 5 characters</span>
-                    <span class="error" *ngIf="loginForm.get('username')?.hasError('maxlength') && loginForm.get('username')?.touched">Username cannot exceed 20 characters</span>
+                <span class="error"
+                    *ngIf="loginForm.get('username')?.hasError('required') && loginForm.get('username')?.touched">Username
+                    is required</span>
+                <span class="error"
+                    *ngIf="loginForm.get('username')?.hasError('minlength') && loginForm.get('username')?.touched">Username
+                    must be at least 5 characters</span>
+                <span class="error"
+                    *ngIf="loginForm.get('username')?.hasError('maxlength') && loginForm.get('username')?.touched">Username
+                    cannot exceed 20 characters</span>
                 <input type="password" name="password" placeholder="Password" formControlName="password">
-                    <span class="error" *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">Password is required</span>
-                    <span class="error" *ngIf="loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched">Password must be at least 6 characters</span>
-                    <span class="error" *ngIf="loginForm.get('password')?.hasError('maxlength') && loginForm.get('password')?.touched">Password cannot exceed 20 characters</span>
+                <span class="error"
+                    *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">Password
+                    is required</span>
+                <span class="error"
+                    *ngIf="loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched">Password
+                    must be at least 6 characters</span>
+                <span class="error"
+                    *ngIf="loginForm.get('password')?.hasError('maxlength') && loginForm.get('password')?.touched">Password
+                    cannot exceed 20 characters</span>
                 <button (click)="login()">Login</button>
                 <span class="infoclass">
-                    <u>Use Below Credentials to Login or Please Sign Up</u> <br/><br/>
-                    Username - mohit <br/>
-                    Password - 123456 <br/><br/>
+                    <u>Use Below Credentials to Login or Please Sign Up</u> <br /><br />
+                    Username - mohit <br />
+                    Password - 123456 <br /><br />
                     Version - 1.2.0
                 </span>
             </form>

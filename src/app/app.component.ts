@@ -5,6 +5,7 @@ import { SpinnerCustomizationComponent } from './components/spinner/spinner-cust
 import { LoadingService } from './services/loader/loading.service';
 import { delay } from 'rxjs';
 import { ChatbotComponent } from './components/chatbot/chatbot/chatbot.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,8 @@ import { ChatbotComponent } from './components/chatbot/chatbot/chatbot.component
     CommonModule,
     SidepanelComponent,
     SpinnerCustomizationComponent,
-    ChatbotComponent
+    ChatbotComponent,
+    FooterComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'], // CORRECTED HERE
