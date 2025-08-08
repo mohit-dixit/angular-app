@@ -14,6 +14,7 @@ body {
 }
 
 .example-container {
+  max-height: fit-content;
   height: 600px;
   border: 1px solid rgba(0, 0, 0, 0.5);
 }
@@ -76,7 +77,14 @@ body {
 
 .logout{
   cursor: pointer;
-  width: 64px;
-  height: 64px;
-  margin-right: 10px;
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+}
+
+.knowmore {
+  color: yellow;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 5px;
 }

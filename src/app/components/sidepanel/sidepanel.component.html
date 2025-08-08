@@ -1,8 +1,9 @@
 <mat-toolbar color="primary" *ngIf="isLoggedIn()" class="example-toolbar toppanel">
     <button mat-icon-button (click)="hamburgerClick()"><mat-icon>menu</mat-icon></button>
-    <h1 class="example-app-name headingclass">Angular 19 + Spring Boot + PostgreSQL Application by Mohit Dixit</h1>
+    <h1 class="example-app-name headingclass">Angular 19 + Spring Boot + PostgreSQL Application</h1>
+    <h4 class="knowmore" routerLink="overview" (click)="hideOnMobile();">| Know more</h4>
     <span class="spacer"></span>
-    <img src="assets/images/logout.png" (click)="logOut()" class="logout" alt="Profile Image">
+    <img src="assets/images/logout.png" title="Log Out" (click)="logOut()" class="logout" alt="Profile Image">
 </mat-toolbar>
 <mat-sidenav-container class="example-container" autosize>
     <mat-sidenav #sidenav *ngIf="isLoggedIn()" class="example-sidenav" mode="side" opened="true">

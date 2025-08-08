@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,13 +16,17 @@
       background-color: #f9f9f9;
       color: #333;
     }
+
     .container {
       max-width: 900px;
       margin: 0 auto;
     }
-    h1, h2 {
+
+    h1,
+    h2 {
       color: #2c3e50;
     }
+
     .section {
       display: flex;
       align-items: center;
@@ -29,12 +34,14 @@
       background-color: #fff;
       border-radius: 8px;
       padding: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
+
     .section img {
       max-width: 60px;
       margin-right: 20px;
     }
+
     .summary {
       background-color: #e8f0fe;
       padding: 20px;
@@ -42,17 +49,19 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <h1>Application Overview</h1>
-    
+
     <div class="section">
       <img src="https://angular.io/assets/images/logos/angular/angular.svg" alt="Angular Logo">
       <div class="section-content">
         <h2>Frontend: Angular 19</h2>
         <p>
           The frontend is built with Angular 19, the latest version of the modern TypeScript framework.
-          It enables the creation of dynamic, component-based single-page applications (SPAs) with robust tooling and excellent performance.
+          It enables the creation of dynamic, component-based single-page applications (SPAs) with robust tooling and
+          excellent performance.
         </p>
       </div>
     </div>
@@ -63,18 +72,21 @@
         <h2>State Management: NgRx</h2>
         <p>
           NgRx is used for managing the application state in a reactive and predictable manner using the Redux pattern.
-          It simplifies state transitions through actions, reducers, selectors, and effects—enhancing scalability and maintainability in large applications.
+          It simplifies state transitions through actions, reducers, selectors, and effects—enhancing scalability and
+          maintainability in large applications.
         </p>
       </div>
     </div>
 
     <div class="section">
-      <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/spring/spring-original.svg" alt="Spring Boot Logo" />
+      <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/spring/spring-original.svg"
+        alt="Spring Boot Logo" />
       <div class="section-content">
         <h2>Backend: Java Spring Boot</h2>
         <p>
           The backend leverages Java Spring Boot to build secure and scalable RESTful APIs.
-          Spring Boot streamlines application setup and development with auto-configuration, embedded servers, and production-ready features.
+          Spring Boot streamlines application setup and development with auto-configuration, embedded servers, and
+          production-ready features.
         </p>
       </div>
     </div>
@@ -85,7 +97,15 @@
         <h2>Authentication: JWT</h2>
         <p>
           JSON Web Token (JWT) is implemented for secure, stateless user authentication.
-          After login, a token is issued to the client which is sent with each request to validate access and ensure user identity without session storage.
+          After login, a token is issued to the client, which is sent with each request to validate access and ensure
+          user identity without session storage.
+
+          To enhance security and protect against client-side vulnerabilities like XSS (Cross-Site Scripting), the JWT
+          is stored in HTTP-only cookies. These cookies are inaccessible to JavaScript, reducing the risk of token theft
+          through malicious scripts. Additionally, setting the Secure flag ensures the cookie is only transmitted over
+          HTTPS, and using the SameSite=Strict or Lax attribute helps prevent CSRF (Cross-Site Request Forgery) attacks.
+          This approach provides a balance between the security of traditional server sessions and the stateless nature
+          of JWT authentication
         </p>
       </div>
     </div>
@@ -101,14 +121,36 @@
       </div>
     </div>
 
+    <div class="section">
+  <img src="https://www.chartjs.org/img/chartjs-logo.svg" alt="Chart.js Logo">
+  <div class="section-content">
+    <h2>Charting: Chart.js with ng2-charts</h2>
+    <p>
+      This application uses <strong>Chart.js</strong> along with the <strong>ng2-charts</strong> Angular wrapper for interactive data visualization.
+      Chart.js provides flexible, responsive, and customizable chart types such as bar, line, pie, radar, and more.
+      The <strong>ng2-charts</strong> library seamlessly integrates Chart.js into Angular applications using reusable components, binding, and Angular change detection.
+    </p>
+  </div>
+</div>
+
     <div class="summary">
-      <h2>Project Summary</h2>
-      <p>
-        This full-stack web application combines Angular 19 for a modern and responsive UI, Java Spring Boot for a powerful backend,
-        and PostgreSQL for robust and scalable data management. JWT Authentication ensures secure access control, while NgRx provides a reactive and centralized state management solution.
-        The system architecture ensures performance, security, maintainability, and scalability.
-      </p>
-    </div>
+  <h2>Project Summary</h2>
+  <p>
+    This full-stack web application combines Angular 19 for a modern and responsive UI, Java Spring Boot for a
+    powerful backend,
+    and PostgreSQL for robust and scalable data management. JWT Authentication ensures secure access control, while
+    NgRx provides a reactive and centralized state management solution.
+  </p>
+  <p>
+    For rich data visualization, the application leverages <strong>Chart.js</strong> with the <strong>ng2-charts</strong> wrapper.
+    This allows the seamless integration of dynamic and responsive charts such as bar, line, pie, and radar charts into Angular components,
+    offering users clear and interactive insights into the application data.
+  </p>
+  <p>
+    The overall architecture ensures performance, security, maintainability, and scalability—ideal for enterprise-level application development.
+  </p>
+</div>
   </div>
 </body>
+
 </html>
