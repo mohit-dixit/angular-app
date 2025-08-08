@@ -9,7 +9,7 @@ import { authGuard } from './guards/auth.guard';
 import { UserFormComponent } from './components/ngrx-example/user-form/user-form.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent, title: 'Login'},
     { path: 'home', component: DashboardComponent, title: 'Home', canActivate: [authGuard] },
     { path: 'overview', component: AboutusComponent, title: 'Overview', canActivate: [authGuard] },
