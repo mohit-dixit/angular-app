@@ -3,7 +3,9 @@
     <h1 class="example-app-name headingclass">Angular 19 + Spring Boot + PostgreSQL Application</h1>
     <h4 class="knowmore" routerLink="overview" (click)="hideOnMobile();">| Know more</h4>
     <span class="spacer"></span>
-    <img src="assets/images/logout.png" title="Log Out" (click)="logOut()" class="logout" alt="Profile Image">
+    <button title="Log Out" (click)="logOut()" class="power-btn">
+        <span class="power-icon"></span>
+    </button>
 </mat-toolbar>
 <mat-sidenav-container class="example-container" autosize>
     <mat-sidenav #sidenav *ngIf="isLoggedIn()" class="example-sidenav" mode="side" opened="true">

@@ -15,7 +15,7 @@ import { ModalComponent } from '../modal/modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TokenManagerService } from '../../services/tokenmanager/token-manager.service';
 import { AppConfigService } from '../../services/app-config.service';
-
+import { ModalTitle, ModalTypes } from '../../constants/globalconst';
 @Component({
   selector: 'app-sidepanel',
   imports: [MatNavList,
@@ -52,9 +52,7 @@ export class SidepanelComponent {
   }
 
   logOut() {
-    this.hamburgerClick();
-    let api = environment.apis.signout;
-    this._router.navigate(['login']);
+    this.showLogOutModalPopup("Are you sure you want to log out?", false);
   }
 
   hamburgerClick() {
@@ -99,12 +97,60 @@ export class SidepanelComponent {
       disableClose: true,
       data: {
         message: msg,
-        toShowExtendButton: toShowExtendButton
+        toShowExtendButton: toShowExtendButton,
+        modaltitle: ModalTitle.SESSION_EXIPRY,
+        modaltype: ModalTypes.SESSION
+      }
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        this.extendToken();
       }
     });
   }
 
+  showLogOutModalPopup(msg: string, toShowExtendButton: boolean): void {
+    this._dialog.open(ModalComponent, {
+      width: '750px',
+      closeOnNavigation: true,
+      disableClose: true,
+      data: {
+        message: msg,
+        toShowExtendButton: toShowExtendButton,
+        modaltitle: ModalTitle.CONFIRMATION,
+        modaltype: ModalTypes.CONFIRM
+      }
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        this.onLogoutConfirm();
+      }
+    });
+  }
+
+  onLogoutConfirm() {
+   this.hamburgerClick();
+    let api = environment.apis.signout;
+    this._router.navigate(['login']);
+  }
+
   swagger() {
     window.open(this.context + environment.apis.swagger, '_blank');
+  }
+
+  extendToken() {
+    let api = environment.apis.extend;
+    this._service.login(api, null).subscribe((data: any) => {
+      if (data && data.success) {
+        this._tokenService.setLoginUserName(data.username);
+        this._snackbar.showSuccessMessage("Session Extended Successfully");
+        this._timerService.resetTimer();
+        this._timerService.startTimer();
+      }
+      else if (data && !data.success && data.message) {
+        this._snackbar.showErrorMessage(data.message);
+      }
+    }, error => {
+      this._snackbar.showErrorMessage("Error in retrieving data. Please check the logs.");
+      console.log(error);
+    });
   }
 }

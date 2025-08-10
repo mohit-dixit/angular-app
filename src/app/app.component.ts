@@ -6,6 +6,9 @@ import { LoadingService } from './services/loader/loading.service';
 import { delay } from 'rxjs';
 import { ChatbotComponent } from './components/chatbot/chatbot/chatbot.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { NavigationEnd, Router } from '@angular/router';
+
+declare let gtag: Function;
 
 @Component({
   selector: 'app-root',
@@ -25,7 +28,15 @@ export class AppComponent {
   title = 'my-app';
   loading = false;
 
-  constructor(private _loading: LoadingService) {}
+  constructor(private _loading: LoadingService, private _router: Router) {
+    this._router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        gtag('config', 'G-RDMVWEPPW6', {
+          page_path: event.urlAfterRedirects,
+        });
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.listenToLoading();
