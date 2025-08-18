@@ -64,7 +64,7 @@ html, body{
     user-select: none; /* Standard syntax */
 }
 
-.bg-purple{
+.bg-night{
     background: url(/assets/images/bg-night.jpg);
     background-repeat: repeat-x;
     background-size: cover;
@@ -186,8 +186,9 @@ li a:hover {
     position: absolute;
     transform: translateX(-50px);
     top: 75%;
+    left: 20%;
     pointer-events: none;
-    animation: rocket-movement 200s linear infinite both running;
+    animation: rocket-movement 50s linear infinite both running;
 }
 
 .object_earth{
@@ -195,32 +196,26 @@ li a:hover {
     top: 20%;
     left: 15%;
     z-index: 90;
-/*    animation: spin-earth 100s infinite linear both;*/
+    animation: spin-earth 30s infinite linear both;
 }
 
 .object_moon{
     position: absolute;
     top: 12%;
     left: 25%;
-/*
     transform: rotate(0deg);
     transition: transform ease-in 99999999999s;
-*/
-}
-
-.earth-moon{
-    
 }
 
 .object_astronaut{
-    animation: rotate-astronaut 200s infinite linear both alternate;
+    animation: rotate-astronaut 100s infinite linear both alternate;
 }
 
 .box_astronaut{
     z-index: 110 !important;
     position: absolute;
-    top: 60%;
-    right: 20%;
+    top: 40%;
+    right: 15%;
     will-change: transform;
     animation: move-astronaut 50s infinite linear both alternate;
 }
@@ -236,42 +231,6 @@ li a:hover {
     background-repeat: repeat;
     background-size: contain;
     background-position: left top;
-}
-
-.glowing_stars .star{
-    position: absolute;
-    border-radius: 100%;
-    background-color: #fff;
-    width: 3px;
-    height: 3px;
-    opacity: 0.3;
-    will-change: opacity;
-}
-
-.glowing_stars .star:nth-child(1){
-    top: 80%;
-    left: 25%;
-    animation: glow-star 2s infinite ease-in-out alternate 1s;
-}
-.glowing_stars .star:nth-child(2){
-    top: 20%;
-    left: 40%;
-    animation: glow-star 2s infinite ease-in-out alternate 3s;
-}
-.glowing_stars .star:nth-child(3){
-    top: 25%;
-    left: 25%;
-    animation: glow-star 2s infinite ease-in-out alternate 5s;
-}
-.glowing_stars .star:nth-child(4){
-    top: 75%;
-    left: 80%;
-    animation: glow-star 2s infinite ease-in-out alternate 7s;
-}
-.glowing_stars .star:nth-child(5){
-    top: 90%;
-    left: 50%;
-    animation: glow-star 2s infinite ease-in-out alternate 9s;
 }
 
 @media only screen and (max-width: 600px){

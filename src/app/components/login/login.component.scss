@@ -113,7 +113,7 @@ button:hover{
   left: 0;
   overflow: hidden;
   z-index: 1000;
-  background: rgba(30, 30, 60, 0.96);
+  background: rgba(30, 30, 60);
   border-bottom: 1px solid #463789;
 }
 
@@ -125,7 +125,7 @@ button:hover{
   font-size: 11px;
   padding: 5px 0;
   letter-spacing: 0.7px;
-  animation: marquee-left 20s linear infinite;
+  animation: marquee-left 50s linear infinite;
   width: 100vw;
 }
 
