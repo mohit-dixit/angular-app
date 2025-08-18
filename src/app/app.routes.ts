@@ -43,16 +43,12 @@ export const routes: Routes = [
     title: 'NGRX Example',
     canActivate: [authGuard],
     loadComponent: () =>
-      import('./components/ngrx-example/user-form/user-form.component').then(
-        m => m.UserFormComponent
-      ),
+      import('./components/ngrx-example/user-form/user-form.component').then(m => m.UserFormComponent),
   },
   {
     path: '**',
     title: 'Page Not Found',
     loadComponent: () =>
-      import('./components/pagenotfound/pagenotfound.component').then(
-        m => m.PagenotfoundComponent
-      ),
+      import('./components/pagenotfound/pagenotfound.component').then(m => m.PagenotfoundComponent),
   },
 ];
