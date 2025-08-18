@@ -1,20 +1,58 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { AboutusComponent } from './components/aboutus/aboutus.component';
-import { ContactusComponent } from './components/contactus/contactus.component';
-import { DepartmentComponent } from './components/department/department.component';
-import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
-import { LoginComponent } from './components/login/login.component';
 import { authGuard } from './guards/auth.guard';
-import { UserFormComponent } from './components/ngrx-example/user-form/user-form.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
-    { path: 'login', component: LoginComponent, title: 'Login'},
-    { path: 'home', component: DashboardComponent, title: 'Home', canActivate: [authGuard] },
-    { path: 'overview', component: AboutusComponent, title: 'Overview', canActivate: [authGuard] },
-    { path: 'aboutme', component: ContactusComponent, title: 'About Me', canActivate: [authGuard] },
-    { path: 'samplecrud', component: DepartmentComponent, title: 'Sample CRUD Operation', canActivate: [authGuard] },
-    { path: 'ngrxexample', component: UserFormComponent, title: 'NGRX Example', canActivate: [authGuard] },
-    { path: '**', component: PagenotfoundComponent, title: 'Page Not Found' }
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+
+  {
+    path: 'login',
+    title: 'Login',
+    loadComponent: () =>
+      import('./components/login/login.component').then(m => m.LoginComponent),
+  },
+  {
+    path: 'home',
+    title: 'Home',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./components/dashboard/dashboard.component').then(m => m.DashboardComponent),
+  },
+  {
+    path: 'overview',
+    title: 'Overview',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./components/aboutus/aboutus.component').then(m => m.AboutusComponent),
+  },
+  {
+    path: 'aboutme',
+    title: 'About Me',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./components/contactus/contactus.component').then(m => m.ContactusComponent),
+  },
+  {
+    path: 'samplecrud',
+    title: 'Sample CRUD Operation',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./components/department/department.component').then(m => m.DepartmentComponent),
+  },
+  {
+    path: 'ngrxexample',
+    title: 'NGRX Example',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./components/ngrx-example/user-form/user-form.component').then(
+        m => m.UserFormComponent
+      ),
+  },
+  {
+    path: '**',
+    title: 'Page Not Found',
+    loadComponent: () =>
+      import('./components/pagenotfound/pagenotfound.component').then(
+        m => m.PagenotfoundComponent
+      ),
+  },
 ];

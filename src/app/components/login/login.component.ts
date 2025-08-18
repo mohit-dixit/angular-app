@@ -139,15 +139,18 @@ export class LoginComponent {
   }
 
   logOut() {
-    this._tokenService.removeLoginUserName();
-    this._timerService.resetTimer();
-    let api = environment.apis.signout;
-    this._httpservice.logout(api).subscribe((data: any) => {      
-      this._snackbar.showSuccessMessage("You have been logged out successfully.");
-    }, error => {
-      console.log("Error in saving data");
-      console.log(error);
-    });
+    let activeUser = this._tokenService.getLoginUserName();
+    if (activeUser) {
+      this._tokenService.removeLoginUserName();
+      this._timerService.resetTimer();
+      let api = environment.apis.signout;
+      this._httpservice.logout(api).subscribe((data: any) => {
+        this._snackbar.showSuccessMessage("You have been logged out successfully.");
+      }, error => {
+        console.log("Error in saving data");
+        console.log(error);
+      });
+    }
   }
 
   ngOnDestroy(): void {
