@@ -15,11 +15,11 @@ body {
 
 /* Container */
 .example-container {
-  max-height: fit-content;
-  height: 600px;
-  border: none;
+   height: calc(100vh - 90px);
+  overflow-y: auto;   /* so it scrolls only when content is larger than screen */
   background-color: #ffffff;
   box-shadow: 0 0 15px rgba(0,0,0,0.05);
+  border: none;
 }
 
 /* Sidenav content center */

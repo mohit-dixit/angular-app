@@ -1,5 +1,5 @@
 <mat-toolbar color="primary" *ngIf="isLoggedIn()" class="example-toolbar toppanel">
-    <button mat-icon-button (click)="hamburgerClick()"><mat-icon>menu</mat-icon></button>
+    <button mat-icon-button *ngIf="isLoggedIn()" (click)="hamburgerClick()"><mat-icon>menu</mat-icon></button>
     <h1 class="example-app-name headingclass">Angular 19 + Spring Boot + PostgreSQL Application</h1>
     <h4 class="knowmore" routerLink="overview" (click)="hideOnMobile();">| Know more</h4>
     <span class="spacer"></span>
@@ -7,7 +7,7 @@
         <span class="power-icon"></span>
     </button>
 </mat-toolbar>
-<mat-sidenav-container class="example-container" autosize>
+<mat-sidenav-container [ngClass]="{ 'example-container': !isLoginPage }" autosize>
     <mat-sidenav #sidenav *ngIf="isLoggedIn()" class="example-sidenav" mode="side" opened="true">
         <mat-nav-list>
             <mat-list-item (click)="showSubmenu = !showSubmenu" class="parent">
@@ -45,7 +45,5 @@
         <mat-nav-list>
         </mat-nav-list>
     </mat-sidenav>
-    <div>
         <router-outlet></router-outlet>
-    </div>
 </mat-sidenav-container>

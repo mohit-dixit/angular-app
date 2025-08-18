@@ -51,6 +51,10 @@ export class SidepanelComponent {
     this.context = this._configService.getConfig().context;
   }
 
+  get isLoginPage(): boolean {
+    return this._router.url === '/login';
+  }
+
   logOut() {
     this.showLogOutModalPopup("Are you sure you want to log out?", false);
   }
