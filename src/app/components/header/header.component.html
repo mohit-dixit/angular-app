@@ -1,8 +1,16 @@
 <mat-toolbar color="primary" *ngIf="isLoggedIn()" class="example-toolbar toppanel">
-    <button mat-icon-button *ngIf="isLoggedIn()" (click)="hamburgerClick()"><mat-icon>menu</mat-icon></button>
-    <h1 class="example-app-name headingclass">Angular 19 + Spring Boot + PostgreSQL Application</h1>
+    <button mat-icon-button *ngIf="isLoggedIn()" (click)="hamburgerClick()">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="example-app-name headingclass">
+        Angular 19 + Spring Boot + PostgreSQL Application
+    </h1>
     <h4 class="knowmore" routerLink="overview" (click)="hideOnMobile()">| Know more</h4>
     <span class="spacer"></span>
+    <div class="user-info">
+        <span class="username">Hi, {{ getLoginUserName() }} | ADMIN</span>
+        <mat-icon>person</mat-icon>
+    </div>
     <button title="Log Out" (click)="logOut()" class="power-btn">
         <span class="power-icon"></span>
     </button>

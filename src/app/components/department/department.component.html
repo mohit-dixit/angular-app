@@ -39,3 +39,6 @@
     ☸ JWT Authentication is used to secure the API endpoints, ensuring that only authorized users can access, add,
     update, or delete department data.<br>
   </div>
+  <h5 *ngIf="!allDepartments || allDepartments.length === 0">
+    No departments found. Please add a department.
+  </h5>

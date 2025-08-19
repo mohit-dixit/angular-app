@@ -5,19 +5,28 @@ import { MatToolbar } from '@angular/material/toolbar';
 import { MatIcon } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-
+import {MatRippleModule} from '@angular/material/core';
 @Component({
   selector: 'app-header',
   imports: [
     MatToolbar,
     MatIcon,
     CommonModule,
-    RouterLink
+    RouterLink,
+    MatRippleModule
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+
+  centered = false;
+  disabled = false;
+  unbounded = false;
+
+  radius = 50;
+  color = 'black';
+
 
   constructor(
     private _tokenService: TokenManagerService,
@@ -30,6 +39,10 @@ export class HeaderComponent {
 
   isLoggedIn() {
     return this._tokenService.isUserLoggedIn();
+  }
+
+  getLoginUserName() {
+    return this._tokenService.getLoginUserName()?.toUpperCase();
   }
 
   hideOnMobile() {
