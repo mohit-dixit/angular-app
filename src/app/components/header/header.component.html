@@ -1,1 +1,9 @@
-<p>header works!</p>
+<mat-toolbar color="primary" *ngIf="isLoggedIn()" class="example-toolbar toppanel">
+    <button mat-icon-button *ngIf="isLoggedIn()" (click)="hamburgerClick()"><mat-icon>menu</mat-icon></button>
+    <h1 class="example-app-name headingclass">Angular 19 + Spring Boot + PostgreSQL Application</h1>
+    <h4 class="knowmore" routerLink="overview" (click)="hideOnMobile()">| Know more</h4>
+    <span class="spacer"></span>
+    <button title="Log Out" (click)="logOut()" class="power-btn">
+        <span class="power-icon"></span>
+    </button>
+</mat-toolbar>

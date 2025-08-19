@@ -7,6 +7,7 @@ import { delay } from 'rxjs';
 import { ChatbotComponent } from './components/chatbot/chatbot/chatbot.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavigationEnd, Router } from '@angular/router';
+import { HeaderComponent } from './components/header/header.component';
 
 declare let gtag: Function;
 
@@ -15,6 +16,7 @@ declare let gtag: Function;
   standalone: true,
   imports: [
     CommonModule,
+    HeaderComponent,
     SidepanelComponent,
     SpinnerCustomizationComponent,
     ChatbotComponent,

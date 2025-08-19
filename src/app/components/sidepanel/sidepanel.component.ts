@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Component, effect, ViewChild } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatListItem, MatNavList } from '@angular/material/list';
 import { MatSidenav, MatSidenavContainer } from '@angular/material/sidenav';
@@ -16,6 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TokenManagerService } from '../../services/tokenmanager/token-manager.service';
 import { AppConfigService } from '../../services/app-config.service';
 import { ModalTitle, ModalTypes } from '../../constants/globalconst';
+import { CommonService } from '../../services/common/common.service';
 @Component({
   selector: 'app-sidepanel',
   imports: [MatNavList,
@@ -23,7 +24,6 @@ import { ModalTitle, ModalTypes } from '../../constants/globalconst';
     MatListItem,
     MatIcon,
     MatSidenavContainer,
-    MatToolbar,
     CommonModule,
     RouterOutlet,
     RouterLink,
@@ -37,6 +37,7 @@ export class SidepanelComponent {
   showSubmenu: boolean = true;
   time$!: Observable<number>;
   private context: any;
+  myMenuExpanded = false;
 
   constructor(private _router: Router,
     private _snackbar: SnackbarService,
@@ -45,7 +46,8 @@ export class SidepanelComponent {
     private _timerService: TimerService,
     private _dialog: MatDialog,
     private _tokenService: TokenManagerService,
-    private _configService: AppConfigService
+    private _configService: AppConfigService,
+    private _commonService: CommonService
   ) {
     this.time$ = this._timerService.time$;
     this.context = this._configService.getConfig().context;
@@ -131,8 +133,7 @@ export class SidepanelComponent {
   }
 
   onLogoutConfirm() {
-   this.hamburgerClick();
-    let api = environment.apis.signout;
+    this.hamburgerClick();
     this._router.navigate(['login']);
   }
 
@@ -156,5 +157,36 @@ export class SidepanelComponent {
       this._snackbar.showErrorMessage("Error in retrieving data. Please check the logs.");
       console.log(error);
     });
+  }
+
+  toggleMyMenu() {
+    this.myMenuExpanded = !this.myMenuExpanded;
+  }
+
+  private hamburgerClickEffect = effect(() => {
+    const value = this._commonService.triggerhamburgerClickSignal();
+    if (value !== null) {
+      this.hamburgerClick();
+    }
+  });
+
+  private hideOnMobileClickEffect = effect(() => {
+    const value = this._commonService.triggerhideOnMobileClickSignal();
+    if (value !== null) {
+      this.hideOnMobile();
+    }
+  });
+
+  private logOutClickEffect = effect(() => {
+    const value = this._commonService.triggerlogOutClickSignal();
+    if (value > 0) {
+      this.logOut();
+    }
+  });
+  
+  ngOnDestroy(): void {
+    this.hamburgerClickEffect.destroy();
+    this.hideOnMobileClickEffect.destroy();
+    this.logOutClickEffect.destroy();
   }
 }
