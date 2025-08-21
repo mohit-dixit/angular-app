@@ -1,12 +1,12 @@
 <mat-sidenav-container [ngClass]="{ 'example-container': !isLoginPage }" autosize>
     <mat-sidenav #sidenav *ngIf="isLoggedIn()" class="example-sidenav" mode="side" opened="true">
         <mat-nav-list>
-            <mat-list-item (click)="showSubmenu = !showSubmenu" class="parent">
+            <mat-list-item (click)="clickNavigationParent()" class="parent">
                 <span class="full-width">NAVIGATION</span>
                 <!-- <mat-icon mat-list-icon>home</mat-icon> -->
-                <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}">expand_more</mat-icon>
+                <mat-icon class="menu-button" [ngClass]="{'rotated' : showNavigationMenu}">expand_more</mat-icon>
             </mat-list-item>
-            <div class="submenu" [ngClass]="{'expanded' : showSubmenu}">
+            <div class="submenu" id="navigationsubmenu" [ngClass]="{'expanded' : showNavigationMenu}">
                 <a mat-list-item routerLink="home" (click)="hideOnMobile();" routerLinkActive="active">Dashboard</a>
                 <a mat-list-item routerLink="overview" (click)="hideOnMobile();" routerLinkActive="active">Application
                     Overview</a>
@@ -21,22 +21,16 @@
                 <a mat-list-item routerLink="aboutme" (click)="this.sidenav.toggle();" routerLinkActive="active">About
                     Me</a>
             </div>
-
             <!-- Admin Section Starts -->
-            <!-- <mat-list-item (click)="toggleMyMenu()">
-                <span class="full-width">Admin Section</span>
-                <mat-icon class="menu-button" [ngClass]="{'rotated': myMenuExpanded}">expand_more</mat-icon>
+            <mat-list-item (click)="clickAdminNavigationParent()">
+                <span class="full-width">ADMINISTRATOR</span>
+                <mat-icon class="menu-button" [ngClass]="{'rotated': showAdminSubmenu}">expand_more</mat-icon>
             </mat-list-item>
-            <div class="submenu" [ngClass]="{'expanded' : myMenuExpanded}">
-                <a mat-list-item routerLink="/new-submenu-1">Manage Access</a>
-                <a mat-list-item routerLink="/new-submenu-2">Sub Menu 2</a>
-            </div> -->
+            <div class="submenu" id="adminnavigationsubmenu" [ngClass]="{'expanded' : showAdminSubmenu}">
+                <a mat-list-item routerLink="/new-submenu-1">Manage Role</a>
+                <a mat-list-item routerLink="/new-submenu-2">Manage Access</a>
+            </div>
             <!-- Admin Section Ends -->
-
-        </mat-nav-list>
-        <p style="margin-left: 10px;" *ngIf="time$ | async as time">Your session will expire in: <strong
-                style="color: red;">{{ formatTime(time) }}</strong></p>
-        <mat-nav-list>
         </mat-nav-list>
     </mat-sidenav>
     <router-outlet></router-outlet>

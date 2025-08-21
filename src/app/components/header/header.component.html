@@ -7,6 +7,8 @@
     </h1>
     <h4 class="knowmore" routerLink="overview" (click)="hideOnMobile()">| Know more</h4>
     <span class="spacer"></span>
+    <p class="expirytext" *ngIf="time$ | async as time">Your session will expire in: <strong
+            style="color: red;">{{ formatTime(time) }}</strong></p>
     <div class="user-info">
         <span class="username">Hi, {{ getLoginUserName() }} | ADMIN</span>
         <mat-icon>person</mat-icon>
