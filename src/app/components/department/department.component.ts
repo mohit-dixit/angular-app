@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../environments/environment';
 import { HttpService } from '../../services/http/http.service';
+import { Subscription } from 'rxjs';
+import { WebSocketService } from '../../services/websocket/websocket.service';
 
 @Component({
   selector: 'app-department',
@@ -12,12 +14,15 @@ import { HttpService } from '../../services/http/http.service';
 })
 export class DepartmentComponent {
 
+  private wsSub?: Subscription;
   allDepartments: any;
   txtName: string = '';
   selectedDepartmentId: number = 0;
   lblConfirmation: string = '';
 
-  constructor(private service: HttpService) { }
+  constructor(private service: HttpService,
+    private ws: WebSocketService
+  ) { }
 
   ngOnInit() {
     this.retrieveAllDepartments();
@@ -88,4 +93,26 @@ export class DepartmentComponent {
     });
   }
 
+  ngAfterViewInit(): void {
+    this.ws.connect();
+    this.retrieveAllDepartments();
+
+    this.wsSub = this.ws.departments$.subscribe(evt => {
+      if (!evt || !this.allDepartments) return;
+
+      if (evt.type === 'CREATED') {
+        this.allDepartments = [evt.payload, ...this.allDepartments];
+      } else if (evt.type === 'UPDATED') {
+        this.allDepartments = this.allDepartments.map((d: any) =>
+          d.id === evt.payload.id ? evt.payload : d
+        );
+      } else if (evt.type === 'DELETED') {
+        this.allDepartments = this.allDepartments.filter((d: any) => d.id !== evt.payload.id);
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.wsSub?.unsubscribe();
+  }
 }

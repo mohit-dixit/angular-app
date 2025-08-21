@@ -10,7 +10,7 @@ export class HttpService {
 
   private context: any;
 
-  constructor(private _http: HttpClient, 
+  constructor(private _http: HttpClient,
     private _configService: AppConfigService
   ) {
     this.context = this._configService.getConfig().context;
@@ -18,7 +18,7 @@ export class HttpService {
 
   savedata(api: string, saveobject: any) {
     const apiUrl = this.context + api;
-    return this._http.post(apiUrl, null, { params: saveobject });
+    return this._http.post(apiUrl, saveobject);
   }
 
   updatedata(api: string, updateobject: any) {
